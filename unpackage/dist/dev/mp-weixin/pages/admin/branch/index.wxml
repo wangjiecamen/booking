@@ -1,0 +1,1 @@
+<view class="branch-page data-v-d67da128"><view wx:if="{{a}}" class="data-v-d67da128"><view wx:for="{{b}}" wx:for-item="item" wx:key="c" bindtap="{{item.b}}" class="branch-item data-v-d67da128"><view class="data-v-d67da128">{{item.a}}</view></view></view><van-empty wx:if="{{c}}" class="data-v-d67da128" u-t="m" u-i="d67da128-0" bind:__l="__l" u-p="{{d}}"></van-empty></view>

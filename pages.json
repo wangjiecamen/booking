@@ -1,0 +1,185 @@
+{
+    "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+
+        {
+            "path": "pages/login/index",
+            "style": {
+                "navigationBarTitleText": "登录"
+            }
+        },
+        {
+            "path": "pages/register/index",
+            "style": {
+                "navigationBarTitleText": "注册"
+            }
+        },
+        {
+            "path": "pages/index/index",
+            "style": {
+                "navigationBarTitleText": "首页"
+            }
+        },
+        {
+            "path": "pages/setting/index",
+            "style": {
+                "navigationBarTitleText": "我的",
+                "usingComponents": {
+                    "van-cell": "/wxcomponents/vant/cell/index",
+                    "van-cell-group": "/wxcomponents/vant/cell-group/index"
+                }
+            }
+        },
+        {
+            "path": "pages/phonebook/index",
+            "style": {
+                "navigationBarTitleText": "通讯录"
+            }
+        },
+
+        {
+            "path": "pages/meeting/index",
+            "style": {
+                "navigationBarTitleText": "预约会议室",
+                "usingComponents": {
+                    "van-dialog": "/wxcomponents/vant/dialog/index"
+                }
+            }
+        },
+        {
+            "path": "pages/notice/index",
+            "style": {
+                "navigationBarTitleText": "公告",
+                "enablePullDownRefresh": true,
+                "onReachBottomDistance": 80,
+                "usingComponents": {
+                    "van-empty": "/wxcomponents/vant/empty/index"
+                }
+            }
+        },
+        {
+            "path": "pages/notice/detail",
+            "style": {
+                "navigationBarTitleText": "公告详情"
+            }
+        },
+        {
+            "path": "pages/meeting-record/index",
+            "style": {
+                "navigationBarTitleText": "会议室记录",
+                "enablePullDownRefresh": true,
+                "onReachBottomDistance": 80,
+                "usingComponents": {
+                    "van-empty": "/wxcomponents/vant/empty/index"
+                }
+            }
+        },
+        {
+            "path": "pages/meeting-record/detail",
+            "style": {
+                "navigationBarTitleText": "会议详情"
+            }
+        },
+        {
+            "path": "pages/admin/branch/index",
+            "style": {
+                "navigationBarTitleText": "部门管理",
+                "enablePullDownRefresh": true,
+                "onReachBottomDistance": 80,
+                "usingComponents": {
+                    "van-empty": "/wxcomponents/vant/empty/index"
+                }
+            }
+        },
+        {
+            "path": "pages/admin/branch/edit",
+            "style": {
+                "navigationBarTitleText": "部门管理"
+            }
+        },
+        {
+            "path": "pages/admin/meeting/approve",
+            "style": {
+                "navigationBarTitleText": "会议室审批"
+            }
+        },
+        {
+            "path": "pages/admin/meeting/list",
+            "style": {
+                "navigationBarTitleText": "会议室管理",
+                "enablePullDownRefresh": true,
+                "onReachBottomDistance": 80,
+                "usingComponents": {
+                    "van-empty": "/wxcomponents/vant/empty/index"
+                }
+            }
+        },
+        {
+            "path": "pages/admin/meeting/edit",
+            "style": {
+                "navigationBarTitleText": "会议室管理"
+            }
+        },
+
+        {
+            "path": "pages/admin/staff/list",
+            "style": {
+                "navigationBarTitleText": "员工管理",
+                "enablePullDownRefresh": true,
+                "onReachBottomDistance": 80,
+                "usingComponents": {
+                    "van-empty": "/wxcomponents/vant/empty/index"
+                }
+            }
+        },
+        {
+            "path": "pages/admin/staff/edit",
+            "style": {
+                "navigationBarTitleText": "员工管理"
+            }
+        }
+    ],
+    "tabBar": {
+        "backgroundColor": "#fff",
+        "color": "#000000",
+        "selectedColor": "#2196F3",
+        "list": [{
+                "pagePath": "pages/index/index",
+                "iconPath": "static/images/settings/ic_nav_home.png",
+                "selectedIconPath": "static/images/settings/ic_nav_home_active.png",
+                "text": "首页"
+            },
+            {
+                "pagePath": "pages/meeting/index",
+                "iconPath": "static/images/settings/ic_nav_boardroom.png",
+                "selectedIconPath": "static/images/settings/ic_nav_boardroom_active.png",
+                "text": "会议室"
+            },
+            {
+                "pagePath": "pages/phonebook/index",
+                "iconPath": "static/images/settings/ic_nav_phonebook.png",
+                "selectedIconPath": "static/images/settings/ic_nav_phonebook_active.png",
+                "text": "通讯录"
+            },
+            {
+                "pagePath": "pages/setting/index",
+                "iconPath": "static/images/settings/ic_nav_my.png",
+                "selectedIconPath": "static/images/settings/ic_nav_my_active.png",
+                "text": "我的"
+            }
+        ]
+    },
+    "networkTimeout": {
+        "request": 100000,
+        "downloadFile": 100000
+    },
+    "globalStyle": {
+        "navigationBarTextStyle": "white",
+        "navigationBarTitleText": "uni-app",
+        "navigationBarBackgroundColor": "#2196F3",
+        "backgroundColor": "#F5F5F5",
+        "usingComponents": {
+            "van-button": "/wxcomponents/vant/button"
+        }
+    },
+    "uniIdRouter": {}
+}

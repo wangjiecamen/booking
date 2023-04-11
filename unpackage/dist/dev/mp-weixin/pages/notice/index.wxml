@@ -1,0 +1,1 @@
+<view class="notice-page data-v-a41149ed"><view wx:if="{{a}}" class="data-v-a41149ed"><view wx:for="{{b}}" wx:for-item="item" wx:key="c" bindtap="{{item.b}}" class="notice-item van-ellipsis data-v-a41149ed">{{item.a}}</view></view><van-empty wx:if="{{c}}" class="data-v-a41149ed" u-t="m" u-i="a41149ed-0" bind:__l="__l" u-p="{{d}}"></van-empty></view>

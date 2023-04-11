@@ -1,0 +1,42 @@
+{
+    "bsonType": "object",
+    "required": ["username", "password"],
+    "properties": {
+        "_id": {
+            "description": "存储文档 ID（用户 ID），系统自动生成"
+        },
+        "username": {
+            "bsonType": "string",
+            "title": "用户名",
+            "description": "用户名，不允许重复",
+            "trim": "both"
+        },
+        "branch": {
+            "bsonType": "string",
+            "title": "所属部门",
+            "description": "用户所属部门",
+            "trim": "both"
+        },
+        "password": {
+            "bsonType": "password",
+            "title": "密码",
+            "description": "密码，加密存储",
+            "trim": "both"
+        },
+        "usertype": {
+            "bsonType": "int",
+            "title": "用户类型",
+            "description": "用户类型：0 管理员 1 普通用户",
+            "defaultValue": 1,
+            "enum": [{
+                    "text": "管理员",
+                    "value": 0
+                },
+                {
+                    "text": "普通用户",
+                    "value": 1
+                }
+            ]
+        }
+    }
+}

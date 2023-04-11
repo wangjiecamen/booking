@@ -1,0 +1,1 @@
+<view class="container data-v-73a8d901"><view wx:for="{{a}}" wx:for-item="b" wx:key="c" bindtap="{{b.b}}" class="block data-v-73a8d901" style="{{'background:' + b.d}}">{{b.a}}</view></view>

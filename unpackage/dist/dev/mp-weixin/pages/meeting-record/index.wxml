@@ -1,0 +1,1 @@
+<view class="record-page data-v-9fc208c6"><view wx:if="{{a}}" class="data-v-9fc208c6"><view wx:for="{{b}}" wx:for-item="item" wx:key="c" bindtap="{{item.b}}" class="record-item data-v-9fc208c6"><view class="data-v-9fc208c6">{{item.a}}</view></view></view><van-empty wx:if="{{c}}" class="data-v-9fc208c6" u-t="m" u-i="9fc208c6-0" bind:__l="__l" u-p="{{d}}"></van-empty></view>
