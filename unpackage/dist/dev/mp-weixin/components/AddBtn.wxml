@@ -1,0 +1,1 @@
+<view class="sumbit_btn data-v-b18b5a7f" bindtap="{{a}}"><slot></slot></view>

@@ -23,8 +23,8 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.login {
-  margin: 30px;
+.btn_wrapper {
+  margin: 10px 30px;
 }
 .register_btn {
   margin-top: 10px;

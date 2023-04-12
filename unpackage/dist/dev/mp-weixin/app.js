@@ -6,8 +6,8 @@ if (!Math) {
   "./pages/register/index.js";
   "./pages/index/index.js";
   "./pages/setting/index.js";
-  "./pages/phonebook/index.js";
   "./pages/meeting/index.js";
+  "./pages/meeting/submit.js";
   "./pages/notice/index.js";
   "./pages/notice/detail.js";
   "./pages/meeting-record/index.js";
@@ -15,13 +15,16 @@ if (!Math) {
   "./pages/admin/branch/index.js";
   "./pages/admin/branch/edit.js";
   "./pages/admin/meeting/approve.js";
+  "./pages/admin/meeting/approveDetail.js";
   "./pages/admin/meeting/list.js";
   "./pages/admin/meeting/edit.js";
   "./pages/admin/staff/list.js";
   "./pages/admin/staff/edit.js";
+  "./pages/admin/notice/detail.js";
+  "./pages/admin/notice/index.js";
 }
 const _sfc_main = {
-  onLaunch: function() {
+  onLaunch: async function() {
     console.log("App Launch");
   },
   onShow: function() {

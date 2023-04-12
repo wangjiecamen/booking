@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "注册",
-  "usingComponents": {}
+  "usingComponents": {
+    "van-picker": "../../wxcomponents/vant/picker/index"
+  }
 }

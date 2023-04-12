@@ -1,12 +1,13 @@
 <template>
     <view>
         <van-cell-group>
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" label="描述信息" border="{{ false }}" />
+            <van-cell title="账号名称" value="moby" />
+            <van-cell title="角色" value="普通用户"></van-cell>
+            <van-cell title="所属部门" value="产品部" />
         </van-cell-group>
     </view>
-    <view style="margin: 10px ;">
-        <van-button block round @click="logout">退出</van-button>
+    <view class="btn">
+        <van-button type="danger" block round @click="logout">退出</van-button>
     </view>
 
 </template>
@@ -19,5 +20,11 @@
     }
 </script>
 
-<style>
+<style scoped lang="scss">
+    .btn {
+        margin: 0 20px;
+        width: -webkit-fill-available;
+        position: fixed;
+        bottom: 20px
+    }
 </style>

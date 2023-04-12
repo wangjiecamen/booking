@@ -2,6 +2,7 @@
     <view class="index_page">
         <banners></banners>
         <functions></functions>
+
     </view>
 </template>
 

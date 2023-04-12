@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "会议详情",
-  "usingComponents": {}
+  "usingComponents": {
+    "uqrcode": "../../uni_modules/Sansnn-uQRCode/components/uqrcode/uqrcode",
+    "uploader": "../../components/uploader"
+  }
 }

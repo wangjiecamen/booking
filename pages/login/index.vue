@@ -1,23 +1,20 @@
 <template>
 
     <view class="login">
-        <uni-forms :modelValue="formData" label-width="45">
-            <uni-forms-item label="账号" name="username">
-                <uni-easyinput type="text" v-model="formData.username" placeholder="请输入账号" />
-            </uni-forms-item>
-            <uni-forms-item label="密码" name="password">
-                <uni-easyinput type="password" v-model="formData.password" placeholder="请输入密码" />
-            </uni-forms-item>
-            <van-button block round color="#2196F3" @click="submit">登录</van-button>
+
+        <van-cell-group>
+            <van-field label='账号' @change="onChangeUserName" :value="formData.username" placeholder="请输入账号"></van-field>
+            <van-field label='密码' @change="onChangePassword" :value="formData.password" placeholder="请输入密码"></van-field>
+        </van-cell-group>
+        <view class="btn_wrapper">
+            <van-button block round class='login_btn' color="#2196F3" @click="submit">登录</van-button>
             <van-button block round class="register_btn" @click="goToRegister">注册</van-button>
-        </uni-forms>
+        </view>
     </view>
+
 </template>
 
 <script setup>
-    import uniEasyinput from '@/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue'
-    import uniForms from '@/uni_modules/uni-forms/components/uni-forms/uni-forms.vue'
-    import uniFormsItem from '@/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue'
     import {
         ref
     } from "vue";
@@ -31,6 +28,12 @@
         uni.navigateTo({
             url: "/pages/register/index"
         })
+    }
+    const onChangeUserName = (e) => {
+        formData.value.username = e.detail
+    }
+    const onChangePassword = (e) => {
+        formData.value.password = e.detail
     }
     const submit = async () => {
         try {
@@ -47,8 +50,8 @@
 </script>
 
 <style lang="scss">
-    .login {
-        margin: 30px;
+    .btn_wrapper {
+        margin: 10px 30px
     }
 
     .register_btn {

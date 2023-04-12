@@ -6,6 +6,10 @@ if (!Array) {
   const _component_van_dialog = common_vendor.resolveComponent("van-dialog");
   _component_van_dialog();
 }
+if (!Math) {
+  AddBtn();
+}
+const AddBtn = () => "../../components/AddBtn.js";
 const _sfc_main = {
   __name: "index",
   setup(__props) {

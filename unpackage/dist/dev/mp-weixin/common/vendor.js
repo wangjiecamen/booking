@@ -46,26 +46,6 @@ function parseStringStyle(cssText) {
   });
   return ret;
 }
-function normalizeClass(value) {
-  let res = "";
-  if (isString(value)) {
-    res = value;
-  } else if (isArray(value)) {
-    for (let i2 = 0; i2 < value.length; i2++) {
-      const normalized = normalizeClass(value[i2]);
-      if (normalized) {
-        res += normalized + " ";
-      }
-    }
-  } else if (isObject$3(value)) {
-    for (const name in value) {
-      if (value[name]) {
-        res += name + " ";
-      }
-    }
-  }
-  return res.trim();
-}
 const toDisplayString = (val) => {
   return isString(val) ? val : val == null ? "" : isArray(val) || isObject$3(val) && (val.toString === objectToString$2 || !isFunction(val.toString)) ? JSON.stringify(val, replacer, 2) : String(val);
 };
@@ -6235,6 +6215,34 @@ function vFor(source, renderItem) {
   }
   return ret;
 }
+function renderSlot(name, props = {}, key) {
+  const instance = getCurrentInstance();
+  const { parent, isMounted, ctx: { $scope } } = instance;
+  const vueIds = ($scope.properties || $scope.props).uI;
+  if (!vueIds) {
+    return;
+  }
+  if (!parent && !isMounted) {
+    onMounted(() => {
+      renderSlot(name, props, key);
+    }, instance);
+    return;
+  }
+  const invoker = findScopedSlotInvoker(vueIds, instance);
+  if (invoker) {
+    invoker(name, props, key);
+  }
+}
+function findScopedSlotInvoker(vueId, instance) {
+  let parent = instance.parent;
+  while (parent) {
+    const invokers = parent.$ssi;
+    if (invokers && invokers[vueId]) {
+      return invokers[vueId];
+    }
+    parent = parent.parent;
+  }
+}
 function stringifyStyle(value) {
   if (isString(value)) {
     return value;
@@ -6251,13 +6259,18 @@ function stringify(styles) {
   }
   return ret;
 }
+function setRef(ref2, id, opts = {}) {
+  const { $templateRefs } = getCurrentInstance();
+  $templateRefs.push({ i: id, r: ref2, k: opts.k, f: opts.f });
+}
 const o$1 = (value, key) => vOn(value, key);
 const f$1 = (source, renderItem) => vFor(source, renderItem);
+const r$1 = (name, props, key) => renderSlot(name, props, key);
 const s$1 = (value) => stringifyStyle(value);
 const e = (target, ...sources) => extend(target, ...sources);
-const n$1 = (value) => normalizeClass(value);
 const t$1 = (val) => toDisplayString(val);
 const p$1 = (props) => renderProps(props);
+const sr = (ref2, id, opts) => setRef(ref2, id, opts);
 function createApp$1(rootComponent, rootProps = null) {
   rootComponent && (rootComponent.mpType = "app");
   return createVueApp(rootComponent, rootProps).use(plugin);
@@ -7086,7 +7099,10 @@ const pages = [
   {
     path: "pages/register/index",
     style: {
-      navigationBarTitleText: "注册"
+      navigationBarTitleText: "注册",
+      usingComponents: {
+        "van-picker": "/wxcomponents/vant/picker/index"
+      }
     }
   },
   {
@@ -7098,17 +7114,7 @@ const pages = [
   {
     path: "pages/setting/index",
     style: {
-      navigationBarTitleText: "我的",
-      usingComponents: {
-        "van-cell": "/wxcomponents/vant/cell/index",
-        "van-cell-group": "/wxcomponents/vant/cell-group/index"
-      }
-    }
-  },
-  {
-    path: "pages/phonebook/index",
-    style: {
-      navigationBarTitleText: "通讯录"
+      navigationBarTitleText: "我的"
     }
   },
   {
@@ -7121,14 +7127,20 @@ const pages = [
     }
   },
   {
+    path: "pages/meeting/submit",
+    style: {
+      navigationBarTitleText: "预约会议室",
+      usingComponents: {
+        "van-picker": "/wxcomponents/vant/picker/index"
+      }
+    }
+  },
+  {
     path: "pages/notice/index",
     style: {
       navigationBarTitleText: "公告",
       enablePullDownRefresh: true,
-      onReachBottomDistance: 80,
-      usingComponents: {
-        "van-empty": "/wxcomponents/vant/empty/index"
-      }
+      onReachBottomDistance: 80
     }
   },
   {
@@ -7142,10 +7154,7 @@ const pages = [
     style: {
       navigationBarTitleText: "会议室记录",
       enablePullDownRefresh: true,
-      onReachBottomDistance: 80,
-      usingComponents: {
-        "van-empty": "/wxcomponents/vant/empty/index"
-      }
+      onReachBottomDistance: 80
     }
   },
   {
@@ -7159,22 +7168,27 @@ const pages = [
     style: {
       navigationBarTitleText: "部门管理",
       enablePullDownRefresh: true,
-      onReachBottomDistance: 80,
-      usingComponents: {
-        "van-empty": "/wxcomponents/vant/empty/index"
-      }
+      onReachBottomDistance: 80
     }
   },
   {
     path: "pages/admin/branch/edit",
     style: {
-      navigationBarTitleText: "部门管理"
+      navigationBarTitleText: ""
     }
   },
   {
     path: "pages/admin/meeting/approve",
     style: {
-      navigationBarTitleText: "会议室审批"
+      navigationBarTitleText: "会议室审批列表",
+      enablePullDownRefresh: true,
+      onReachBottomDistance: 80
+    }
+  },
+  {
+    path: "pages/admin/meeting/approveDetail",
+    style: {
+      navigationBarTitleText: "审批详情"
     }
   },
   {
@@ -7182,16 +7196,13 @@ const pages = [
     style: {
       navigationBarTitleText: "会议室管理",
       enablePullDownRefresh: true,
-      onReachBottomDistance: 80,
-      usingComponents: {
-        "van-empty": "/wxcomponents/vant/empty/index"
-      }
+      onReachBottomDistance: 80
     }
   },
   {
     path: "pages/admin/meeting/edit",
     style: {
-      navigationBarTitleText: "会议室管理"
+      navigationBarTitleText: ""
     }
   },
   {
@@ -7199,16 +7210,30 @@ const pages = [
     style: {
       navigationBarTitleText: "员工管理",
       enablePullDownRefresh: true,
-      onReachBottomDistance: 80,
-      usingComponents: {
-        "van-empty": "/wxcomponents/vant/empty/index"
-      }
+      onReachBottomDistance: 80
     }
   },
   {
     path: "pages/admin/staff/edit",
     style: {
-      navigationBarTitleText: "员工管理"
+      navigationBarTitleText: "",
+      usingComponents: {
+        "van-picker": "/wxcomponents/vant/picker/index"
+      }
+    }
+  },
+  {
+    path: "pages/admin/notice/detail",
+    style: {
+      navigationBarTitleText: ""
+    }
+  },
+  {
+    path: "pages/admin/notice/index",
+    style: {
+      navigationBarTitleText: "公告列表",
+      enablePullDownRefresh: true,
+      onReachBottomDistance: 80
     }
   }
 ];
@@ -7230,12 +7255,6 @@ const tabBar = {
       text: "会议室"
     },
     {
-      pagePath: "pages/phonebook/index",
-      iconPath: "static/images/settings/ic_nav_phonebook.png",
-      selectedIconPath: "static/images/settings/ic_nav_phonebook_active.png",
-      text: "通讯录"
-    },
-    {
       pagePath: "pages/setting/index",
       iconPath: "static/images/settings/ic_nav_my.png",
       selectedIconPath: "static/images/settings/ic_nav_my_active.png",
@@ -7253,7 +7272,15 @@ const globalStyle = {
   navigationBarBackgroundColor: "#2196F3",
   backgroundColor: "#F5F5F5",
   usingComponents: {
-    "van-button": "/wxcomponents/vant/button"
+    "van-button": "/wxcomponents/vant/button",
+    "van-cell": "/wxcomponents/vant/cell/index",
+    "van-cell-group": "/wxcomponents/vant/cell-group/index",
+    "van-field": "/wxcomponents/vant/field/index",
+    "van-switch": "/wxcomponents/vant/switch/index",
+    "van-empty": "/wxcomponents/vant/empty/index",
+    "van-swipe-cell": "/wxcomponents/vant/swipe-cell/index",
+    "van-popup": "/wxcomponents/vant/popup/index",
+    "van-icon": "/wxcomponents/vant/icon/index"
   }
 };
 const uniIdRouter = {};
@@ -9819,6 +9846,7 @@ var lodash_drop = drop;
 const createHook = (lifecycle) => (hook, target = getCurrentInstance()) => {
   !isInSSRComponentSetup && injectHook(lifecycle, hook, target);
 };
+const onLoad = /* @__PURE__ */ createHook(ON_LOAD);
 const onReachBottom = /* @__PURE__ */ createHook(ON_REACH_BOTTOM);
 const onPullDownRefresh = /* @__PURE__ */ createHook(ON_PULL_DOWN_REFRESH);
 exports.Ls = Ls;
@@ -9830,17 +9858,20 @@ exports.f = f$1;
 exports.index = index;
 exports.lodash_drop = lodash_drop;
 exports.lodash_dropright = lodash_dropright;
-exports.n = n$1;
 exports.o = o$1;
 exports.onBeforeMount = onBeforeMount;
+exports.onLoad = onLoad;
 exports.onMounted = onMounted;
 exports.onPullDownRefresh = onPullDownRefresh;
 exports.onReachBottom = onReachBottom;
 exports.p = p$1;
+exports.r = r$1;
 exports.ref = ref;
 exports.resolveComponent = resolveComponent;
 exports.s = s$1;
+exports.sr = sr;
 exports.t = t$1;
+exports.toRaw = toRaw;
 exports.unref = unref;
 exports.useCssVars = useCssVars;
 exports.wx$1 = wx$1;

@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "预约会议室",
   "usingComponents": {
-    "van-dialog": "../../wxcomponents/vant/dialog/index"
+    "van-dialog": "../../wxcomponents/vant/dialog/index",
+    "add-btn": "../../components/AddBtn"
   }
 }

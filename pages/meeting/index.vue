@@ -39,8 +39,8 @@
 
         <van-dialog id="van-dialog" />
     </div>
+    <add-btn v-if="showSubmitBtn" @on-click="submit">确定</add-btn>
 
-    <view v-if="showSubmitBtn" class="sumbit_btn" @click="submit">确定</view>
 
 </template>
 <script setup>
@@ -58,6 +58,7 @@
     import dropright from 'lodash.dropright'
     import drop from 'lodash.drop'
     import Dialog from "@/wxcomponents/vant/dialog/dialog";
+    import AddBtn from '@/components/AddBtn.vue'
     const weekStr = getWeekStr()
     const currentDateIndex = ref(0)
     const scrollTop = ref(0)
@@ -433,21 +434,5 @@
             }
         }
 
-    }
-
-    .sumbit_btn {
-        position: fixed;
-        bottom: 20rpx;
-        right: 20rpx;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        box-sizing: border-box;
-        width: 50px;
-        font-size: 12px;
-        background: rgba(33, 150, 243, 0.8);
-        height: 50px;
-        border-radius: 50%
     }
 </style>

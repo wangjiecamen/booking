@@ -17,22 +17,22 @@ export const userFunctions = [{
 }]
 
 export const adminFunctions = [{
-        url: '/pages/admin/branchManage',
+        url: '/pages/admin/branch/index',
         title: '部门管理',
         bg: 'linear-gradient(#1A237E,#2196F3);'
     },
     {
-        url: '/pages/admin/staffManage',
+        url: '/pages/admin/staff/index',
         title: '员工管理',
         bg: 'linear-gradient(#1A237E,#2196F3);'
     },
     {
-        url: '/pages/admin/meetingManage',
+        url: '/pages/admin/meetin/list',
         title: '会议室管理',
         bg: 'linear-gradient(#1A237E,#2196F3);'
     },
     {
-        url: '/pages/admin/meetingApprove',
+        url: '/pages/admin/meeting/approve',
         title: '会议室审批',
         bg: 'linear-gradient(#1A237E,#2196F3);'
     }
@@ -41,4 +41,8 @@ export const adminFunctions = [{
 export const ROLE = {
     USER: 'user',
     ADMIN: 'admin'
+}
+
+export const approveStatus = {
+
 }

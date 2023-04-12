@@ -1,0 +1,154 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+    "bsonType": "object",
+    "required": [],
+    "permission": {
+        "read": false,
+        "create": false,
+        "update": false,
+        "delete": false
+    },
+    "properties": {
+        "_id": {
+            "description": "ID，系统自动生成"
+        },
+        "roomId": {
+            "bsonType": "string",
+            "description": "会议室ID",
+            "title": "会议室ID",
+            "foreignKey": "room._id"
+        },
+        "room_name": {
+            "bsonType": "string",
+            "description": "会议室名称",
+            "title": "会议室名称",
+            "maxLength": 10
+        },
+        "user_id": {
+            "bsonType": "string",
+            "description": "预约人ID",
+            "title": "预约人ID",
+            "foreignKey": "user._id"
+        },
+        "user_name": {
+            "bsonType": "string",
+            "description": "预约人",
+            "title": "预约人",
+            "maxLength": 10
+        },
+        "branch_id": {
+            "bsonType": "string",
+            "description": "部门ID",
+            "title": "部门ID",
+            "foreignKey": "branch._id"
+        },
+        "branch_name": {
+            "bsonType": "string",
+            "description": "部门名称",
+            "title": "部门名称",
+            "maxLength": 10
+        },
+        "date": {
+            "bsonType": "timestamp",
+            "description": "会议日期",
+            "title": "会议日期",
+            "defaultValue": {
+                "$env": "now"
+            }
+        },
+        "start_time": {
+            "bsonType": "string",
+            "description": "会议开始时间",
+            "title": "会议开始时间",
+            "maxLength": 10
+        },
+        "end_time": {
+            "bsonType": "string",
+            "description": "会议结束时间",
+            "title": "会议结束时间",
+            "maxLength": 10
+        },
+        "remark": {
+            "bsonType": "string",
+            "description": "备注",
+            "title": "备注",
+            "maxLength": 50
+        },
+        "audit": {
+            "bsonType": "int",
+            "description": "是否需要审核：1 需要 0 不需要",
+            "title": "是否需要审核",
+            "defaultValue": 1,
+            "enum": [{
+                    "text": "需要",
+                    "value": 1
+                },
+                {
+                    "text": "不需要",
+                    "value": 0
+                }
+            ]
+        },
+        "status": {
+            "bsonType": "int",
+            "description": "会议状态： 0 待审批 1 审批通过 2 审批不通过 3 已取消",
+            "title": "会议状态",
+            "enum": [{
+                    "text": "审批通过",
+                    "value": 1
+                },
+                {
+                    "text": "待审批",
+                    "value": 0
+                },
+                {
+                    "text": "审批不通过",
+                    "value": 2
+                },
+                {
+                    "text": "已取消",
+                    "value": 3
+                }
+            ]
+        },
+        "sign_num": {
+            "bsonType": "int",
+            "description": "签到人数",
+            "title": "签到人数"
+        },
+        "doc_url": {
+            "bsonType": "string",
+            "description": "文档上传",
+            "title": "文档上传"
+        },
+        "del_flag": {
+            "bsonType": "int",
+            "description": "删除状态：1 已删除 0 未删除",
+            "title": "删除状态",
+            "defaultValue": 0,
+            "enum": [{
+                    "text": "已删除",
+                    "value": 1
+                },
+                {
+                    "text": "未删除",
+                    "value": 0
+                }
+            ]
+        },
+        "create_time": {
+            "bsonType": "timestamp",
+            "description": "创建时间",
+            "forceDefaultValue": {
+                "$env": "now"
+            }
+        },
+        "update_time": {
+            "bsonType": "timestamp",
+            "description": "更新时间",
+            "defaultValue": {
+                "$env": "now"
+            }
+        }
+    }
+}

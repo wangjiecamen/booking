@@ -2,7 +2,5 @@
   "navigationBarTitleText": "公告",
   "enablePullDownRefresh": true,
   "onReachBottomDistance": 80,
-  "usingComponents": {
-    "van-empty": "../../wxcomponents/vant/empty/index"
-  }
+  "usingComponents": {}
 }

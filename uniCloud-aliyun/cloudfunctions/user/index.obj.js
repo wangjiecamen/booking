@@ -1,25 +1,37 @@
 // 云对象教程: https://uniapp.dcloud.net.cn/uniCloud/cloud-obj
 // jsdoc语法提示教程：https://ask.dcloud.net.cn/docs/#//ask.dcloud.net.cn/article/129
 module.exports = {
-    _before: function() { // 通用预处理器
+    _before() {
 
     },
+    async login(params) {
+        if (!params.username || !params.password) {
+            return {
+                errCode: '20001',
+                errMsg: '用户名或密码不能为空'
+            }
+        }
 
-    login(param = {}) {
-        if (!param.username) {
+
+    },
+    async register(params) {
+        if (!params.username || !params.password) {
             return {
                 errCode: '20001',
-                errMsg: '用户名不能为空'
+                errMsg: '用户名或密码不能为空'
             }
         }
-        if (!param.password) {
-            return {
-                errCode: '20001',
-                errMsg: '密码不能为空'
-            }
-        }
+        const dbJQL = uniCloud.databaseForJQL({ // 获取JQL database引用，此处需要传入云对象的clientInfo
+            clientInfo: this.getClientInfo()
+        })
+        const data = await dbJQL.collection('user').add({
+            username: params.username,
+            password: params.password,
+            branch_id: params.branch_id
+        })
+        console.log(data)
+
     }
-
     /**
      * method1方法描述
      * @param {string} param1 参数1描述

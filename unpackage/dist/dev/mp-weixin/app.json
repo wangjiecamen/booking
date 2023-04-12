@@ -4,8 +4,8 @@
     "pages/register/index",
     "pages/index/index",
     "pages/setting/index",
-    "pages/phonebook/index",
     "pages/meeting/index",
+    "pages/meeting/submit",
     "pages/notice/index",
     "pages/notice/detail",
     "pages/meeting-record/index",
@@ -13,13 +13,24 @@
     "pages/admin/branch/index",
     "pages/admin/branch/edit",
     "pages/admin/meeting/approve",
+    "pages/admin/meeting/approveDetail",
     "pages/admin/meeting/list",
     "pages/admin/meeting/edit",
     "pages/admin/staff/list",
-    "pages/admin/staff/edit"
+    "pages/admin/staff/edit",
+    "pages/admin/notice/detail",
+    "pages/admin/notice/index"
   ],
   "usingComponents": {
-    "van-button": "/wxcomponents/vant/button"
+    "van-button": "/wxcomponents/vant/button",
+    "van-cell": "/wxcomponents/vant/cell/index",
+    "van-cell-group": "/wxcomponents/vant/cell-group/index",
+    "van-field": "/wxcomponents/vant/field/index",
+    "van-switch": "/wxcomponents/vant/switch/index",
+    "van-empty": "/wxcomponents/vant/empty/index",
+    "van-swipe-cell": "/wxcomponents/vant/swipe-cell/index",
+    "van-popup": "/wxcomponents/vant/popup/index",
+    "van-icon": "/wxcomponents/vant/icon/index"
   },
   "window": {
     "navigationBarTextStyle": "white",
@@ -43,12 +54,6 @@
         "iconPath": "static/images/settings/ic_nav_boardroom.png",
         "selectedIconPath": "static/images/settings/ic_nav_boardroom_active.png",
         "text": "会议室"
-      },
-      {
-        "pagePath": "pages/phonebook/index",
-        "iconPath": "static/images/settings/ic_nav_phonebook.png",
-        "selectedIconPath": "static/images/settings/ic_nav_phonebook_active.png",
-        "text": "通讯录"
       },
       {
         "pagePath": "pages/setting/index",

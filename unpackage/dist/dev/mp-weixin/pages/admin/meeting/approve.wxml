@@ -1,0 +1,1 @@
+<view class="approve-page data-v-26045047"><view wx:if="{{a}}" class="data-v-26045047"><view wx:for="{{b}}" wx:for-item="item" wx:key="c" bindtap="{{item.b}}" class="approve-item data-v-26045047"><view class="data-v-26045047">{{item.a}}</view></view></view><van-empty wx:if="{{c}}" class="data-v-26045047" u-t="m" u-i="26045047-0" bind:__l="__l" u-p="{{d}}"></van-empty></view>

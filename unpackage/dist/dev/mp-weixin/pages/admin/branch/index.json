@@ -3,6 +3,6 @@
   "enablePullDownRefresh": true,
   "onReachBottomDistance": 80,
   "usingComponents": {
-    "van-empty": "../../../wxcomponents/vant/empty/index"
+    "add-btn": "../../../components/AddBtn"
   }
 }

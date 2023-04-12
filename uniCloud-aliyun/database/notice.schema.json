@@ -1,0 +1,59 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+    "bsonType": "object",
+    "required": [],
+    "permission": {
+        "read": false,
+        "create": false,
+        "update": false,
+        "delete": false
+    },
+    "properties": {
+        "_id": {
+            "description": "ID，系统自动生成"
+        },
+        "title": {
+            "bsonType": "string",
+            "title": "标题",
+            "description": "标题",
+            "trim": "both",
+            "maxLength": 50
+        },
+        "content": {
+            "bsonType": "string",
+            "title": "内容",
+            "description": "内容",
+            "trim": "both",
+            "maxLength": 505
+        },
+        "del_flag": {
+            "bsonType": "int",
+            "description": "删除状态：1 已删除 0 未删除",
+            "title": "删除状态",
+            "defaultValue": 0,
+            "enum": [{
+                    "text": "已删除",
+                    "value": 1
+                },
+                {
+                    "text": "未删除",
+                    "value": 0
+                }
+            ]
+        },
+        "create_time": {
+            "bsonType": "timestamp",
+            "description": "创建时间",
+            "forceDefaultValue": {
+                "$env": "now"
+            }
+        },
+        "update_time": {
+            "bsonType": "timestamp",
+            "description": "更新时间",
+            "defaultValue": {
+                "$env": "now"
+            }
+        }
+    }
+}

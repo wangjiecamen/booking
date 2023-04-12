@@ -17,17 +17,20 @@ const _sfc_main = {
     return (_ctx, _cache) => {
       return {
         a: common_vendor.p({
-          title: "单元格",
-          value: "内容"
+          title: "账号名称",
+          value: "moby"
         }),
         b: common_vendor.p({
-          title: "单元格",
-          value: "内容",
-          label: "描述信息",
-          border: "{{ false }}"
+          title: "角色",
+          value: "普通用户"
         }),
-        c: common_vendor.o(logout),
-        d: common_vendor.p({
+        c: common_vendor.p({
+          title: "所属部门",
+          value: "产品部"
+        }),
+        d: common_vendor.o(logout),
+        e: common_vendor.p({
+          type: "danger",
           block: true,
           round: true
         })
@@ -35,5 +38,5 @@ const _sfc_main = {
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/apple/sub-work/booking/booking/pages/setting/index.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-861f37f2"], ["__file", "/Users/apple/sub-work/booking/booking/pages/setting/index.vue"]]);
 wx.createPage(MiniProgramPage);

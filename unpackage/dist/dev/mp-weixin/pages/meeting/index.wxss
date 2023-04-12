@@ -135,18 +135,3 @@
 .time_room .room .cell.selected.data-v-f3707b27:not(.defaultSelected.selectedByTapTime) {
   background: rgba(33, 150, 243, 0.5);
 }
-.sumbit_btn.data-v-f3707b27 {
-  position: fixed;
-  bottom: 20rpx;
-  right: 20rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  box-sizing: border-box;
-  width: 50px;
-  font-size: 12px;
-  background: rgba(33, 150, 243, 0.8);
-  height: 50px;
-  border-radius: 50%;
-}

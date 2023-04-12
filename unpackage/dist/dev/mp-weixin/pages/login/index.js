@@ -1,15 +1,11 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
 if (!Array) {
+  const _component_van_field = common_vendor.resolveComponent("van-field");
+  const _component_van_cell_group = common_vendor.resolveComponent("van-cell-group");
   const _component_van_button = common_vendor.resolveComponent("van-button");
-  _component_van_button();
+  (_component_van_field + _component_van_cell_group + _component_van_button)();
 }
-if (!Math) {
-  (uniEasyinput + uniFormsItem + uniForms)();
-}
-const uniEasyinput = () => "../../uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.js";
-const uniForms = () => "../../uni_modules/uni-forms/components/uni-forms/uni-forms.js";
-const uniFormsItem = () => "../../uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.js";
 const _sfc_main = {
   __name: "index",
   setup(__props) {
@@ -23,6 +19,12 @@ const _sfc_main = {
         url: "/pages/register/index"
       });
     };
+    const onChangeUserName = (e) => {
+      formData.value.username = e.detail;
+    };
+    const onChangePassword = (e) => {
+      formData.value.password = e.detail;
+    };
     const submit = async () => {
       try {
         console.log(formData.value);
@@ -35,40 +37,28 @@ const _sfc_main = {
     };
     return (_ctx, _cache) => {
       return {
-        a: common_vendor.o(($event) => formData.value.username = $event),
+        a: common_vendor.o(onChangeUserName),
         b: common_vendor.p({
-          type: "text",
-          placeholder: "请输入账号",
-          modelValue: formData.value.username
-        }),
-        c: common_vendor.p({
           label: "账号",
-          name: "username"
+          value: formData.value.username,
+          placeholder: "请输入账号"
         }),
-        d: common_vendor.o(($event) => formData.value.password = $event),
-        e: common_vendor.p({
-          type: "password",
-          placeholder: "请输入密码",
-          modelValue: formData.value.password
-        }),
-        f: common_vendor.p({
+        c: common_vendor.o(onChangePassword),
+        d: common_vendor.p({
           label: "密码",
-          name: "password"
+          value: formData.value.password,
+          placeholder: "请输入密码"
         }),
-        g: common_vendor.o(submit),
-        h: common_vendor.p({
+        e: common_vendor.o(submit),
+        f: common_vendor.p({
           block: true,
           round: true,
           color: "#2196F3"
         }),
-        i: common_vendor.o(goToRegister),
-        j: common_vendor.p({
+        g: common_vendor.o(goToRegister),
+        h: common_vendor.p({
           block: true,
           round: true
-        }),
-        k: common_vendor.p({
-          modelValue: formData.value,
-          ["label-width"]: "45"
         })
       };
     };

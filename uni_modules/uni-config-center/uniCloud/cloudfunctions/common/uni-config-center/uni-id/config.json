@@ -1,0 +1,13 @@
+{
+    "passwordSecret": [{
+        "type": "hmac-sha256",
+        "version": 1
+    }],
+    "passwordStrength": "medium",
+    "tokenSecret": "booking123",
+    "requestAuthSecret": "booking123",
+    "tokenExpiresIn": 7200,
+    "tokenExpiresThreshold": 3600,
+    "passwordErrorLimit": 6,
+    "passwordErrorRetryTime": 3600
+}

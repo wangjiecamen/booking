@@ -1,0 +1,82 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+    "bsonType": "object",
+    "required": [],
+    "permission": {
+        "read": false,
+        "create": false,
+        "update": false,
+        "delete": false
+    },
+    "properties": {
+        "_id": {
+            "description": "ID，系统自动生成"
+        },
+        "name": {
+            "bsonType": "string",
+            "title": "会议室名称",
+            "description": "会议室名称，不允许重复",
+            "trim": "both",
+            "maxLength": 10
+        },
+        "status": {
+            "bsonType": "int",
+            "description": "会议室状态：1 正常 0 禁用",
+            "title": "会议室状态",
+            "defaultValue": 1,
+            "enum": [{
+                    "text": "正常",
+                    "value": 1
+                },
+                {
+                    "text": "禁用",
+                    "value": 0
+                }
+            ]
+        },
+        "audit": {
+            "bsonType": "int",
+            "description": "是否需要审核：1 需要 0 不需要",
+            "title": "是否需要审核",
+            "defaultValue": 1,
+            "enum": [{
+                    "text": "需要",
+                    "value": 1
+                },
+                {
+                    "text": "不需要",
+                    "value": 0
+                }
+            ]
+        },
+        "del_flag": {
+            "bsonType": "int",
+            "description": "删除状态：1 已删除 0 未删除",
+            "title": "删除状态",
+            "defaultValue": 0,
+            "enum": [{
+                    "text": "已删除",
+                    "value": 1
+                },
+                {
+                    "text": "未删除",
+                    "value": 0
+                }
+            ]
+        },
+        "create_time": {
+            "bsonType": "timestamp",
+            "description": "创建时间",
+            "forceDefaultValue": {
+                "$env": "now"
+            }
+        },
+        "update_time": {
+            "bsonType": "timestamp",
+            "description": "更新时间",
+            "defaultValue": {
+                "$env": "now"
+            }
+        }
+    }
+}
