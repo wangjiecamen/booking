@@ -1,12 +1,12 @@
 <template>
     <view class="flex flex-wrap">
-        <view class="mr-20rpx mb-20rpx relative" v-for="(file, index) in fileList" :key="file">
-            <image @click="preview(index)" :src="file" class="w-200rpx h-200rpx rounded-16rpx"></image>
-            <view class="delete_btn" @click="deleteFile(index)">
+        <view class="files" v-for="(file, index) in fileList" :key="file">
+            <image @click="preview(index)" :src="file"></image>
+            <view v-if="!readonly" class="delete_btn" @click="deleteFile(index)">
                 <van-icon class="delete_icon" name="cross" />
             </view>
         </view>
-        <view v-if="fileList.length < 5" class="uploader" @click="upload">
+        <view v-if="fileList.length < max && !readonly" class=" uploader" @click="upload">
             <van-icon name="plus" size="30"></van-icon>
         </view>
     </view>
@@ -18,6 +18,10 @@
     } from "vue";
 
     const props = defineProps({
+        readonly: {
+            type: Boolean,
+            default: false
+        },
         max: {
             type: Number,
             default: 5
@@ -42,15 +46,42 @@
     const upload = () => {
         uni.chooseImage({
             count: 1,
-            success: (chooseImageRes) => {
-                let tempFilePaths = chooseImageRes.tempFilePaths
-
+            success: async (chooseImageRes) => {
+                let filePath = chooseImageRes.tempFilePaths[0]
+                console.log(filePath)
+                const fileExtension = filePath.split('.').pop()
+                const result = await uniCloud.uploadFile({
+                    filePath: filePath,
+                    cloudPath: `meeting_doc_${new Date().getTime()}.${fileExtension}`,
+                });
+                console.log(result)
+                fileListRef.value.push(result.fileID)
             }
         })
     }
 </script>
 
 <style scoped lang="scss">
+    .flex {
+        display: flex;
+    }
+
+    .flex-wrap {
+        flex-wrap: wrap;
+    }
+
+    .files {
+        width: 100px;
+        height: 100px;
+        position: relative;
+
+        image {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+        }
+    }
+
     .uploader {
         display: inline-flex;
         align-items: center;

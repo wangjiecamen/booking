@@ -4,8 +4,9 @@ const common_vendor = require("./common/vendor.js");
 const uni_modules_uniIdPages_init = require("./uni_modules/uni-id-pages/init.js");
 require("./uni_modules/uni-id-pages/config.js");
 if (!Math) {
-  "./uni_modules/uni-id-pages/pages/login/login-withpwd.js";
   "./pages/index/index.js";
+  "./uni_modules/uni-id-pages/pages/login/login-withpwd.js";
+  "./pages/sign/index.js";
   "./pages/setting/index.js";
   "./pages/meeting/index.js";
   "./pages/meeting/submit.js";

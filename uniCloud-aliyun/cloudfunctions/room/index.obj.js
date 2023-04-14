@@ -6,6 +6,35 @@ module.exports = {
     _before: function() { // 通用预处理器
 
     },
+    async getRoomListWithBooking(date) {
+        const dbJQL = uniCloud.databaseForJQL({
+            clientInfo: this.getClientInfo()
+        })
+        const room = dbJQL.collection('room').getTemp()
+        const booking = dbJQL.collection('booking').where({
+            status: 1,
+            date
+        }).getTemp()
+        const {
+            data
+        } = await dbJQL.collection(room, booking).where({
+            status: 1,
+            del_flag: 0
+        }).field("_id,name,audit").get()
+        console.log(data)
+        const res = data.map(i => {
+            return {
+                roomAudit: i.audit,
+                roomId: i._id._value,
+                roomName: i.name,
+                meeting: i._id.booking
+            }
+        })
+        return {
+            errCode: 0,
+            data: res
+        }
+    },
     async getList(params) {
         const {
             pageNo = 1, pageSize = 10
@@ -17,17 +46,12 @@ module.exports = {
             .where({
                 del_flag: 0
             })
-            .skip((pageNo - 1) * 10)
-            .limit(10)
+            .skip((pageNo - 1) * pageSize)
+            .limit(pageSize)
             .get({
                 getCount: true
             })
-        const {
-            total
-        } = await dbJQL.collection('room')
-            .where({
-                del_flag: 0
-            }).count()
+
         return {
             errCode: 0,
             data: data.data,
@@ -103,5 +127,4 @@ module.exports = {
             data
         }
     }
-
 }

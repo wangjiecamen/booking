@@ -1,5 +1,6 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const utils_user = require("../../utils/user.js");
 if (!Array) {
   const _component_van_cell = common_vendor.resolveComponent("van-cell");
   const _component_van_cell_group = common_vendor.resolveComponent("van-cell-group");
@@ -16,12 +17,7 @@ const _sfc_main = {
       role: []
     });
     common_vendor.onMounted(async () => {
-      const user = common_vendor.Ls.getCurrentUserInfo();
-      const {
-        data
-      } = await common_vendor.Ls.importObject("user").getUserInfo(user.uid);
-      console.log(data);
-      info.value = data;
+      info.value = utils_user.getUserInfo();
     });
     const logout = async () => {
       if (common_vendor.Ls.getCurrentUserInfo().tokenExpired > Date.now()) {
@@ -38,7 +34,7 @@ const _sfc_main = {
       });
     };
     return (_ctx, _cache) => {
-      return {
+      return common_vendor.e({
         a: common_vendor.p({
           title: "账号名称",
           value: info.value.username
@@ -51,16 +47,19 @@ const _sfc_main = {
           title: "角色",
           value: info.value.role.join(",")
         }),
-        d: common_vendor.p({
+        d: info.value.branchName
+      }, info.value.branchName ? {
+        e: common_vendor.p({
           title: "所属部门",
           value: info.value.branchName
-        }),
-        e: common_vendor.o(logout),
-        f: common_vendor.p({
+        })
+      } : {}, {
+        f: common_vendor.o(logout),
+        g: common_vendor.p({
           block: true,
           round: true
         })
-      };
+      });
     };
   }
 };

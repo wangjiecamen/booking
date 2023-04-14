@@ -23,6 +23,22 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.flex.data-v-cb0d792e {
+  display: flex;
+}
+.flex-wrap.data-v-cb0d792e {
+  flex-wrap: wrap;
+}
+.files.data-v-cb0d792e {
+  width: 100px;
+  height: 100px;
+  position: relative;
+}
+.files image.data-v-cb0d792e {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
 .uploader.data-v-cb0d792e {
   display: inline-flex;
   align-items: center;

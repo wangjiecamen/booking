@@ -1,0 +1,7 @@
+{
+  "name": "booking",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

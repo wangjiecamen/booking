@@ -301,6 +301,34 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/meeting/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/meeting-record/detail",
+          "query": "form=%257B%2522room_id%2522%253A%25226438ad64e1a35cf99fd9e0d1%2522%252C%2522start_time%2522%253A%252210%253A00%2522%252C%2522end_time%2522%253A%252211%253A30%2522%252C%2522date%2522%253A%25222023-04-14%2522%252C%2522branch_name%2522%253A%2522%25E4%25BA%25A7%25E5%2593%2581%25E9%2583%25A8%2522%252C%2522branch_id%2522%253A%25226437d83d819ce8bdcf54424f%2522%252C%2522user_id%2522%253A%25226437feb8e1a35cf99fb78911%2522%252C%2522user_name%2522%253A%2522moby1%2522%257D",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/meeting-record/detail",
+          "query": "form=%257B%2522room_id%2522%253A%25226438ad6ee766bb29751186ae%2522%252C%2522start_time%2522%253A%252211%253A00%2522%252C%2522end_time%2522%253A%252212%253A30%2522%252C%2522date%2522%253A%25222023-04-14%2522%252C%2522branch_name%2522%253A%2522%25E4%25BA%25A7%25E5%2593%2581%25E9%2583%25A8%2522%252C%2522branch_id%2522%253A%25226437d83d819ce8bdcf54424f%2522%252C%2522user_id%2522%253A%25226437feb8e1a35cf99fb78911%2522%252C%2522user_name%2522%253A%2522moby1%2522%257D",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/admin/meeting/approve",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

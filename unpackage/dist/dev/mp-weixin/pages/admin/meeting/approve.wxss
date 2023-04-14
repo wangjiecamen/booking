@@ -23,7 +23,7 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-approve-page.data-v-26045047 {
+.approve-page.data-v-26045047 {
   padding: 10px;
 }
 .approve-item.data-v-26045047 {

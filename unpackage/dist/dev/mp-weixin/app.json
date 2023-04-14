@@ -1,7 +1,8 @@
 {
   "pages": [
-    "uni_modules/uni-id-pages/pages/login/login-withpwd",
     "pages/index/index",
+    "uni_modules/uni-id-pages/pages/login/login-withpwd",
+    "pages/sign/index",
     "pages/setting/index",
     "pages/meeting/index",
     "pages/meeting/submit",

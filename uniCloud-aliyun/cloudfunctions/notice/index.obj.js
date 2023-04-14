@@ -17,17 +17,12 @@ module.exports = {
             .where({
                 del_flag: 0
             })
-            .skip((pageNo - 1) * 10)
-            .limit(10)
+            .skip((pageNo - 1) * pageSize)
+            .limit(pageSize)
             .get({
                 getCount: true
             })
-        const {
-            total
-        } = await dbJQL.collection('notice')
-            .where({
-                del_flag: 0
-            }).count()
+
         return {
             errCode: 0,
             data: data.data,

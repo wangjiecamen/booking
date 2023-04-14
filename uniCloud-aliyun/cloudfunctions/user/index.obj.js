@@ -19,9 +19,11 @@ module.exports = {
         const res = data[0]
         if (res) {
             const branch = res.department_id[0] || {}
-            res.branchName = res.department_id[0].name || ''
+            res.branchName = branch.name || ''
+            res.branchId = branch._id || ''
             delete res.department_id
         }
+        console.log(res)
         return {
             errCode: 0,
             data: res

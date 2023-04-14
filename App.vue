@@ -5,6 +5,12 @@
             console.log('App Launch')
             await uniIdPageInit()
 
+            // const user = uniCloud.getCurrentUserInfo()
+            // const {
+            //     data
+            // } = await uniCloud.importObject('user').getUserInfo(user.uid)
+            // uni.setStorageSync('userinfo', data)
+
         },
         onShow: function() {
             console.log('App Show')

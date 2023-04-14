@@ -7112,17 +7112,24 @@ const createSubpackageApp = initCreateSubpackageApp();
 }
 const pages = [
   {
+    path: "pages/index/index",
+    style: {
+      navigationBarTitleText: "首页"
+    },
+    needLogin: true
+  },
+  {
     path: "uni_modules/uni-id-pages/pages/login/login-withpwd",
     style: {
       navigationBarTitleText: ""
     }
   },
   {
-    path: "pages/index/index",
+    path: "pages/sign/index",
     style: {
-      navigationBarTitleText: "首页"
+      navigationBarTitleText: "签到"
     },
-    needLogin: true
+    needLogin: false
   },
   {
     path: "pages/setting/index",
@@ -9743,6 +9750,13 @@ let Us = new class {
   } }), gs(Us), Us.addInterceptor = D, Us.removeInterceptor = F, Us.interceptObject = M;
 })();
 var Ls = Us;
+const createHook = (lifecycle) => (hook, target = getCurrentInstance()) => {
+  !isInSSRComponentSetup && injectHook(lifecycle, hook, target);
+};
+const onShow = /* @__PURE__ */ createHook(ON_SHOW);
+const onLoad = /* @__PURE__ */ createHook(ON_LOAD);
+const onReachBottom = /* @__PURE__ */ createHook(ON_REACH_BOTTOM);
+const onPullDownRefresh = /* @__PURE__ */ createHook(ON_PULL_DOWN_REFRESH);
 var INFINITY$1 = 1 / 0, MAX_INTEGER$1 = 17976931348623157e292, NAN$1 = 0 / 0;
 var symbolTag$1 = "[object Symbol]";
 var reTrim$1 = /^\s+|\s+$/g;
@@ -9900,13 +9914,6 @@ function toNumber(value) {
   return isBinary || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NAN : +value;
 }
 var lodash_drop = drop;
-const createHook = (lifecycle) => (hook, target = getCurrentInstance()) => {
-  !isInSSRComponentSetup && injectHook(lifecycle, hook, target);
-};
-const onShow = /* @__PURE__ */ createHook(ON_SHOW);
-const onLoad = /* @__PURE__ */ createHook(ON_LOAD);
-const onReachBottom = /* @__PURE__ */ createHook(ON_REACH_BOTTOM);
-const onPullDownRefresh = /* @__PURE__ */ createHook(ON_PULL_DOWN_REFRESH);
 exports.Ls = Ls;
 exports._export_sfc = _export_sfc;
 exports.computed = computed;

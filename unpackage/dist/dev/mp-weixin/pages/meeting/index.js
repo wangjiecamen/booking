@@ -1,6 +1,7 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
 const utils_date = require("../../utils/date.js");
+const utils_user = require("../../utils/user.js");
 const wxcomponents_vant_dialog_dialog = require("../../wxcomponents/vant/dialog/dialog.js");
 if (!Array) {
   const _component_van_dialog = common_vendor.resolveComponent("van-dialog");
@@ -28,62 +29,16 @@ const _sfc_main = {
     let selectedCells = [];
     let completeCellSelected = false;
     let completeTimeSelected = false;
-    const roomList = common_vendor.ref([{
-      roomId: 0,
-      roomName: "会议室A",
-      meeting: [
-        {
-          start: "09:30",
-          end: "10:30",
-          remark: "remark",
-          branch: "产品部",
-          branchId: "29",
-          id: "1"
-        },
-        {
-          start: "12:30",
-          end: "13:00",
-          remark: "remark1",
-          branch: "产品部",
-          branchId: "30",
-          id: "3"
-        }
-      ]
-    }, {
-      roomId: 1,
-      roomName: "会议室B",
-      meeting: [{
-        start: "16:00",
-        //16:00 16:30,17:00 17:30 18:00   
-        end: "18:30",
-        remark: "remark",
-        branch: "产品部",
-        branchId: "90",
-        id: "7"
-      }]
-    }, {
-      roomId: 2,
-      roomName: "会议室C",
-      meeting: []
-    }, {
-      roomId: 3,
-      roomName: "会议室D",
-      meeting: []
-    }, {
-      roomId: 4,
-      roomName: "会议室E",
-      meeting: []
-    }, {
-      roomId: 5,
-      roomName: "会议室F",
-      meeting: []
-    }]);
+    const roomList = common_vendor.ref([]);
     const currentMonth = common_vendor.computed(() => {
       const m = utils_date.getWeeks()[currentDateIndex.value].getMonth() + 1;
       return String(m).padStart(2, "0");
     });
     const roomDomTotalLength = common_vendor.computed(() => {
       return roomList.value.length * parseInt(roomDomLength.value) + "rpx";
+    });
+    const date = common_vendor.computed(() => {
+      return new Date().getFullYear() + "-" + currentMonth.value + "-" + weekStr[currentDateIndex.value].d;
     });
     const selectDate = (index) => {
       currentDateIndex.value = index;
@@ -93,7 +48,6 @@ const _sfc_main = {
     };
     const submit = () => {
       const cells = selectedCells.filter((i) => i.selected);
-      console.log(cells);
       const startTime = cells[0].time;
       let endTime = cells[cells.length - 1].time;
       const [e, e_h] = endTime.split(":");
@@ -101,21 +55,31 @@ const _sfc_main = {
         endTime = e + ":30";
       if (e_h === "30")
         endTime = Number(e) + 1 + ":00";
+      const userinfo = common_vendor.index.getStorageSync("userinfo");
       const result = {
-        roomId: cells[0].roomId,
-        start: startTime,
-        end: endTime,
-        date: new Date().getFullYear() + "-" + currentMonth.value + "-" + weekStr[currentDateIndex.value].d
+        room_id: cells[0].roomId,
+        audit: cells[0].roomAudit,
+        start_time: startTime,
+        end_time: endTime,
+        date: date.value,
+        room_name: cells[0].roomName,
+        branch_name: userinfo.branchName,
+        branch_id: userinfo.branchId,
+        user_id: userinfo._id,
+        user_name: userinfo.username
       };
       console.log(result);
+      common_vendor.index.navigateTo({
+        url: `/pages/meeting-record/detail?form=${encodeURIComponent(JSON.stringify(result))}`
+      });
     };
     const onClickCell = (cell, time_index) => {
       console.log(cell);
+      console.log(utils_user.getUserInfo().branchId, ">>>>");
       if (cell.defaultSelected) {
-        wxcomponents_vant_dialog_dialog.Dialog.confirm({
-          showCancelButton: false,
-          message: `部门：${cell.branch}
-备注：${cell.remark}`
+        const type = utils_user.getUserInfo().branchId === cell.branch_id ? "edit" : "detail";
+        common_vendor.index.navigateTo({
+          url: `/pages/meeting-record/detail?id=${cell.id}&type=${type}`
         });
       } else {
         cell.selected = !cell.selected;
@@ -190,9 +154,9 @@ const _sfc_main = {
     const getCellOfMeeting = (meeting) => {
       let arr = [];
       meeting.forEach((i) => {
-        if (i.start && i.end) {
-          const [s, s_h] = i.start.split(":");
-          const [e, e_h] = i.end.split(":");
+        if (i.start_time && i.end_time) {
+          const [s, s_h] = i.start_time.split(":");
+          const [e, e_h] = i.end_time.split(":");
           let l = utils_date.getTimeList(s, e);
           if (s_h === "30")
             l = common_vendor.lodash_drop(l, 1);
@@ -201,9 +165,9 @@ const _sfc_main = {
           if (e_h === "00")
             l = common_vendor.lodash_dropright(l, 2);
           const item = l.map((t) => ({
-            id: i.id,
-            branch: i.branch,
-            branchId: i.branchId,
+            id: i._id,
+            branch_name: i.branch_name,
+            branch_id: i.branch_id,
             remark: i.remark,
             time: t
           }));
@@ -212,8 +176,11 @@ const _sfc_main = {
       });
       return arr;
     };
-    common_vendor.onMounted(() => {
-      roomList.value.forEach((i) => {
+    const getList = async () => {
+      const {
+        data
+      } = await common_vendor.Ls.importObject("room").getRoomListWithBooking(date.value);
+      roomList.value = data.map((i) => {
         i.cell = [];
         const t = getCellOfMeeting(i.meeting);
         for (let k of timeList) {
@@ -221,17 +188,21 @@ const _sfc_main = {
           if (targetIndex !== -1) {
             i.cell.push({
               roomId: i.roomId,
+              roomName: i.roomName,
+              roomAudit: i.roomAudit,
               defaultSelected: true,
               selected: false,
               time: k,
               id: t[targetIndex].id,
-              branch: t[targetIndex].branch,
-              branchId: t[targetIndex].branchId,
+              branch_name: t[targetIndex].branch_name,
+              branch_id: t[targetIndex].branch_id,
               remark: t[targetIndex].remark,
               selectedByTapTime: false
             });
           } else {
             i.cell.push({
+              roomAudit: i.roomAudit,
+              roomName: i.roomName,
               roomId: i.roomId,
               defaultSelected: false,
               selected: false,
@@ -240,7 +211,12 @@ const _sfc_main = {
             });
           }
         }
+        return i;
       });
+      console.log(roomList.value);
+    };
+    common_vendor.onShow(() => {
+      getList();
     });
     return (_ctx, _cache) => {
       return common_vendor.e({
@@ -270,7 +246,7 @@ const _sfc_main = {
               return common_vendor.e({
                 a: (item.cell[time_index - 1] ? !item.cell[time_index - 1].id : false) && i.defaultSelected
               }, (item.cell[time_index - 1] ? !item.cell[time_index - 1].id : false) && i.defaultSelected ? {
-                b: common_vendor.t(i.branch)
+                b: common_vendor.t(i.branch_name)
               } : {}, {
                 c: i.selected ? 1 : "",
                 d: i.defaultSelected ? 1 : "",

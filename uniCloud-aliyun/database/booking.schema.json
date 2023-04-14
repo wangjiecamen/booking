@@ -3,16 +3,16 @@
     "bsonType": "object",
     "required": [],
     "permission": {
-        "read": false,
-        "create": false,
-        "update": false,
+        "read": true,
+        "create": true,
+        "update": true,
         "delete": false
     },
     "properties": {
         "_id": {
             "description": "ID，系统自动生成"
         },
-        "roomId": {
+        "room_id": {
             "bsonType": "string",
             "description": "会议室ID",
             "title": "会议室ID",
@@ -49,12 +49,10 @@
             "maxLength": 10
         },
         "date": {
-            "bsonType": "timestamp",
+            "bsonType": "string",
             "description": "会议日期",
             "title": "会议日期",
-            "defaultValue": {
-                "$env": "now"
-            }
+            "maxLength": 20
         },
         "start_time": {
             "bsonType": "string",
@@ -78,7 +76,7 @@
             "bsonType": "int",
             "description": "是否需要审核：1 需要 0 不需要",
             "title": "是否需要审核",
-            "defaultValue": 1,
+            "defaultValue": 0,
             "enum": [{
                     "text": "需要",
                     "value": 1
@@ -93,6 +91,7 @@
             "bsonType": "int",
             "description": "会议状态： 0 待审批 1 审批通过 2 审批不通过 3 已取消",
             "title": "会议状态",
+            "defaultValue": 0,
             "enum": [{
                     "text": "审批通过",
                     "value": 1
@@ -114,12 +113,14 @@
         "sign_num": {
             "bsonType": "int",
             "description": "签到人数",
-            "title": "签到人数"
+            "title": "签到人数",
+            "defaultValue": 0
         },
         "doc_url": {
             "bsonType": "string",
             "description": "文档上传",
-            "title": "文档上传"
+            "title": "文档上传",
+            "defaultValue": ""
         },
         "del_flag": {
             "bsonType": "int",

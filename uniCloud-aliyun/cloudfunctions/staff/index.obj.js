@@ -13,17 +13,12 @@ module.exports = {
         })
         const data = await dbJQL.collection('uni-id-users')
             .where('status==0||status==1').field('_id,username,status')
-            .skip((pageNo - 1) * 10)
-            .limit(10)
+            .skip((pageNo - 1) * pageSize)
+            .limit(pageSize)
             .get({
                 getCount: true
             })
-        const {
-            total
-        } = await dbJQL.collection('uni-id-users')
-            .where({
-                status: 0,
-            }).count()
+
         return {
             errCode: 0,
             data: data.data,

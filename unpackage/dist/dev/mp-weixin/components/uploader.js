@@ -7,6 +7,10 @@ if (!Array) {
 const _sfc_main = {
   __name: "uploader",
   props: {
+    readonly: {
+      type: Boolean,
+      default: false
+    },
     max: {
       type: Number,
       default: 5
@@ -31,27 +35,38 @@ const _sfc_main = {
     const upload = () => {
       common_vendor.index.chooseImage({
         count: 1,
-        success: (chooseImageRes) => {
-          chooseImageRes.tempFilePaths;
+        success: async (chooseImageRes) => {
+          let filePath = chooseImageRes.tempFilePaths[0];
+          console.log(filePath);
+          const fileExtension = filePath.split(".").pop();
+          const result = await common_vendor.Ls.uploadFile({
+            filePath,
+            cloudPath: `meeting_doc_${new Date().getTime()}.${fileExtension}`
+          });
+          console.log(result);
+          fileListRef.value.push(result.fileID);
         }
       });
     };
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: common_vendor.f(__props.fileList, (file, index, i0) => {
-          return {
+          return common_vendor.e({
             a: common_vendor.o(($event) => preview(index), file),
-            b: file,
+            b: file
+          }, !__props.readonly ? {
             c: "cb0d792e-0-" + i0,
-            d: common_vendor.o(($event) => deleteFile(index), file),
-            e: file
-          };
+            d: common_vendor.p({
+              name: "cross"
+            }),
+            e: common_vendor.o(($event) => deleteFile(index), file)
+          } : {}, {
+            f: file
+          });
         }),
-        b: common_vendor.p({
-          name: "cross"
-        }),
-        c: __props.fileList.length < 5
-      }, __props.fileList.length < 5 ? {
+        b: !__props.readonly,
+        c: __props.fileList.length < __props.max && !__props.readonly
+      }, __props.fileList.length < __props.max && !__props.readonly ? {
         d: common_vendor.p({
           name: "plus",
           size: "30"

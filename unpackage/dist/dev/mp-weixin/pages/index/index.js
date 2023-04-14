@@ -8,7 +8,6 @@ const Functions = () => "../../components/Functions.js";
 const _sfc_main = {
   __name: "index",
   setup(__props) {
-    common_vendor.ref("admin");
     return (_ctx, _cache) => {
       return {};
     };

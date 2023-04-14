@@ -39,6 +39,21 @@ export const ROLE = {
     ADMIN: 'admin'
 }
 
-export const approveStatus = {
-
+export const bookingStatus = {
+    0: {
+        text: '待审批',
+        color: '#222'
+    },
+    1: {
+        text: '审批通过',
+        color: '#4cd964'
+    },
+    2: {
+        text: '审批拒绝',
+        color: '#dd524d'
+    },
+    3: {
+        text: '已取消',
+        color: '#222'
+    }
 }
