@@ -12,7 +12,7 @@ const _sfc_main = {
   __name: "edit",
   setup(__props) {
     const formData = common_vendor.ref({
-      branchName: "",
+      name: "",
       status: 1
     });
     common_vendor.onLoad((options) => {
@@ -20,19 +20,33 @@ const _sfc_main = {
         title: options.id ? "部门详情" : "新增部门"
       });
       if (options.id) {
+        formData.value._id = options.id;
         getDetail();
       }
     });
-    const getDetail = () => {
+    const getDetail = async () => {
+      const {
+        data
+      } = await common_vendor.Ls.importObject("branch").getItem({
+        _id: formData.value._id
+      });
+      console.log(data);
+      formData.value.name = data.name;
+      formData.value.status = data.status;
     };
     const onChangeBranchName = (e) => {
-      formData.value.branchName = e.detail;
+      formData.value.name = e.detail;
     };
     const onChangeStatus = (e) => {
       formData.value.status = e.detail;
     };
-    const submit = () => {
+    const submit = async () => {
       console.log(formData.value);
+      if (formData.value._id) {
+        await common_vendor.Ls.importObject("branch").updateItem(formData.value);
+      } else {
+        await common_vendor.Ls.importObject("branch").addItem(formData.value);
+      }
       common_vendor.index.navigateBack();
     };
     return (_ctx, _cache) => {
@@ -40,7 +54,7 @@ const _sfc_main = {
         a: common_vendor.o(onChangeBranchName),
         b: common_vendor.p({
           label: "部门名称",
-          value: formData.value.branchName,
+          value: formData.value.name,
           placeholder: "请输入"
         }),
         c: common_vendor.o(onChangeStatus),

@@ -15,12 +15,12 @@
         onBeforeMount,
         ref
     } from "vue"
-    const userType = uni.getStorageSync('USER_TYPE') || 1
     const functions = ref([])
     onBeforeMount(() => {
-        console.log(userType)
-        if (userType === 0) functions.value = adminFunctions
-        if (userType === 1) functions.value = userFunctions
+        console.log(uniCloud.getCurrentUserInfo().role[0])
+        const userType = uniCloud.getCurrentUserInfo().role[0]
+        if (userType === 'admin') functions.value = adminFunctions
+        if (userType === 'user') functions.value = userFunctions
     })
     const goTo = (b) => {
         uni.navigateTo({

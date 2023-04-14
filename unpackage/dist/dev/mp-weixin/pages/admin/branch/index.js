@@ -15,19 +15,37 @@ const _sfc_main = {
   setup(__props) {
     const fetched = common_vendor.ref(true);
     const pageNo = common_vendor.ref(1);
-    const list = common_vendor.ref([{
-      branchName: "亚马逊",
-      status: 0
-    }, {
-      branchName: "亚马22逊",
-      status: 1
-    }]);
+    const list = common_vendor.ref([]);
     const goToAdd = () => {
       common_vendor.index.navigateTo({
         url: `/pages/admin/branch/edit`
       });
     };
-    const onDelete = (id) => {
+    const onDelete = async (id) => {
+      await common_vendor.Ls.importObject("branch").deleteItem({
+        _id: id
+      });
+      getList(true);
+    };
+    common_vendor.onShow(() => {
+      getList(true);
+    });
+    const getList = async (isRefresh = false) => {
+      if (isRefresh)
+        pageNo.value = 1;
+      fetched.value = false;
+      const data = await common_vendor.Ls.importObject("branch").getList({
+        pageNo: pageNo.value,
+        pageSize: 10
+      });
+      if (isRefresh)
+        list.value = [];
+      if (list.value.length < data.total) {
+        list.value.push(...data.data);
+      }
+      fetched.value = true;
+      common_vendor.index.stopPullDownRefresh();
+      console.log(data);
     };
     const goToDetail = (id) => {
       common_vendor.index.navigateTo({
@@ -35,10 +53,10 @@ const _sfc_main = {
       });
     };
     common_vendor.onReachBottom(() => {
+      getList();
     });
     common_vendor.onPullDownRefresh(() => {
-      list.value = [];
-      pageNo.value = 1;
+      getList(true);
     });
     return (_ctx, _cache) => {
       return common_vendor.e({
@@ -46,13 +64,13 @@ const _sfc_main = {
       }, list.value.length ? {
         b: common_vendor.f(list.value, (item, k0, i0) => {
           return common_vendor.e({
-            a: common_vendor.t(item.branchName),
+            a: common_vendor.t(item.name),
             b: item.status === 1
           }, item.status === 1 ? {} : {}, {
-            c: common_vendor.o(($event) => goToDetail(_ctx.id), item.id),
-            d: common_vendor.o(($event) => onDelete(_ctx.id), item.id),
+            c: common_vendor.o(($event) => goToDetail(item._id), item._id),
+            d: common_vendor.o(($event) => onDelete(item._id), item._id),
             e: "d67da128-1-" + i0 + "," + ("d67da128-0-" + i0),
-            f: item.id,
+            f: item._id,
             g: "d67da128-0-" + i0
           });
         }),

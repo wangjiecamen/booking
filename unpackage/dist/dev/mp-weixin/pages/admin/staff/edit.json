@@ -1,6 +1,6 @@
 {
   "navigationBarTitleText": "",
   "usingComponents": {
-    "van-picker": "../../../wxcomponents/vant/picker/index"
+    "uni-captcha": "../../../uni_modules/uni-captcha/components/uni-captcha/uni-captcha"
   }
 }

@@ -46,6 +46,26 @@ function parseStringStyle(cssText) {
   });
   return ret;
 }
+function normalizeClass(value) {
+  let res = "";
+  if (isString(value)) {
+    res = value;
+  } else if (isArray(value)) {
+    for (let i2 = 0; i2 < value.length; i2++) {
+      const normalized = normalizeClass(value[i2]);
+      if (normalized) {
+        res += normalized + " ";
+      }
+    }
+  } else if (isObject$3(value)) {
+    for (const name in value) {
+      if (value[name]) {
+        res += name + " ";
+      }
+    }
+  }
+  return res.trim();
+}
 const toDisplayString = (val) => {
   return isString(val) ? val : val == null ? "" : isArray(val) || isObject$3(val) && (val.toString === objectToString$2 || !isFunction(val.toString)) ? JSON.stringify(val, replacer, 2) : String(val);
 };
@@ -6268,7 +6288,8 @@ const f$1 = (source, renderItem) => vFor(source, renderItem);
 const r$1 = (name, props, key) => renderSlot(name, props, key);
 const s$1 = (value) => stringifyStyle(value);
 const e = (target, ...sources) => extend(target, ...sources);
-const t$1 = (val) => toDisplayString(val);
+const n$1 = (value) => normalizeClass(value);
+const t = (val) => toDisplayString(val);
 const p$1 = (props) => renderProps(props);
 const sr = (ref2, id, opts) => setRef(ref2, id, opts);
 function createApp$1(rootComponent, rootProps = null) {
@@ -7091,31 +7112,24 @@ const createSubpackageApp = initCreateSubpackageApp();
 }
 const pages = [
   {
-    path: "pages/login/index",
+    path: "uni_modules/uni-id-pages/pages/login/login-withpwd",
     style: {
-      navigationBarTitleText: "登录"
-    }
-  },
-  {
-    path: "pages/register/index",
-    style: {
-      navigationBarTitleText: "注册",
-      usingComponents: {
-        "van-picker": "/wxcomponents/vant/picker/index"
-      }
+      navigationBarTitleText: ""
     }
   },
   {
     path: "pages/index/index",
     style: {
       navigationBarTitleText: "首页"
-    }
+    },
+    needLogin: true
   },
   {
     path: "pages/setting/index",
     style: {
       navigationBarTitleText: "我的"
-    }
+    },
+    needLogin: true
   },
   {
     path: "pages/meeting/index",
@@ -7124,16 +7138,16 @@ const pages = [
       usingComponents: {
         "van-dialog": "/wxcomponents/vant/dialog/index"
       }
-    }
+    },
+    needLogin: true
   },
   {
     path: "pages/meeting/submit",
     style: {
       navigationBarTitleText: "预约会议室",
-      usingComponents: {
-        "van-picker": "/wxcomponents/vant/picker/index"
-      }
-    }
+      usingComponents: {}
+    },
+    needLogin: true
   },
   {
     path: "pages/notice/index",
@@ -7141,13 +7155,15 @@ const pages = [
       navigationBarTitleText: "公告",
       enablePullDownRefresh: true,
       onReachBottomDistance: 80
-    }
+    },
+    needLogin: true
   },
   {
     path: "pages/notice/detail",
     style: {
       navigationBarTitleText: "公告详情"
-    }
+    },
+    needLogin: true
   },
   {
     path: "pages/meeting-record/index",
@@ -7155,13 +7171,15 @@ const pages = [
       navigationBarTitleText: "会议室记录",
       enablePullDownRefresh: true,
       onReachBottomDistance: 80
-    }
+    },
+    needLogin: true
   },
   {
     path: "pages/meeting-record/detail",
     style: {
       navigationBarTitleText: "会议详情"
-    }
+    },
+    needLogin: true
   },
   {
     path: "pages/admin/branch/index",
@@ -7169,13 +7187,15 @@ const pages = [
       navigationBarTitleText: "部门管理",
       enablePullDownRefresh: true,
       onReachBottomDistance: 80
-    }
+    },
+    needLogin: true
   },
   {
     path: "pages/admin/branch/edit",
     style: {
       navigationBarTitleText: ""
-    }
+    },
+    needLogin: true
   },
   {
     path: "pages/admin/meeting/approve",
@@ -7183,13 +7203,15 @@ const pages = [
       navigationBarTitleText: "会议室审批列表",
       enablePullDownRefresh: true,
       onReachBottomDistance: 80
-    }
+    },
+    needLogin: true
   },
   {
     path: "pages/admin/meeting/approveDetail",
     style: {
       navigationBarTitleText: "审批详情"
-    }
+    },
+    needLogin: true
   },
   {
     path: "pages/admin/meeting/list",
@@ -7197,13 +7219,15 @@ const pages = [
       navigationBarTitleText: "会议室管理",
       enablePullDownRefresh: true,
       onReachBottomDistance: 80
-    }
+    },
+    needLogin: true
   },
   {
     path: "pages/admin/meeting/edit",
     style: {
       navigationBarTitleText: ""
-    }
+    },
+    needLogin: true
   },
   {
     path: "pages/admin/staff/list",
@@ -7211,22 +7235,23 @@ const pages = [
       navigationBarTitleText: "员工管理",
       enablePullDownRefresh: true,
       onReachBottomDistance: 80
-    }
+    },
+    needLogin: true
   },
   {
     path: "pages/admin/staff/edit",
     style: {
       navigationBarTitleText: "",
-      usingComponents: {
-        "van-picker": "/wxcomponents/vant/picker/index"
-      }
-    }
+      usingComponents: {}
+    },
+    needLogin: true
   },
   {
     path: "pages/admin/notice/detail",
     style: {
       navigationBarTitleText: ""
-    }
+    },
+    needLogin: true
   },
   {
     path: "pages/admin/notice/index",
@@ -7234,6 +7259,34 @@ const pages = [
       navigationBarTitleText: "公告列表",
       enablePullDownRefresh: true,
       onReachBottomDistance: 80
+    },
+    needLogin: true
+  },
+  {
+    path: "uni_modules/uni-id-pages/pages/userinfo/userinfo",
+    style: {
+      navigationBarTitleText: "个人资料"
+    },
+    needLogin: true
+  },
+  {
+    path: "uni_modules/uni-id-pages/pages/register/register",
+    style: {
+      navigationBarTitleText: "注册"
+    }
+  },
+  {
+    path: "uni_modules/uni-id-pages/pages/common/webview/webview",
+    style: {
+      enablePullDownRefresh: false,
+      navigationBarTitleText: ""
+    }
+  },
+  {
+    path: "uni_modules/uni-id-pages/pages/register/register-admin",
+    style: {
+      enablePullDownRefresh: false,
+      navigationBarTitleText: "注册管理员账号"
     }
   }
 ];
@@ -7280,11 +7333,15 @@ const globalStyle = {
     "van-empty": "/wxcomponents/vant/empty/index",
     "van-swipe-cell": "/wxcomponents/vant/swipe-cell/index",
     "van-popup": "/wxcomponents/vant/popup/index",
-    "van-icon": "/wxcomponents/vant/icon/index"
+    "van-icon": "/wxcomponents/vant/icon/index",
+    "van-picker": "/wxcomponents/vant/picker/index"
   }
 };
-const uniIdRouter = {};
-const t = {
+const uniIdRouter = {
+  loginPage: "uni_modules/uni-id-pages/pages/login/login-withpwd",
+  resToLogin: true
+};
+const pagesJson = {
   pages,
   tabBar,
   networkTimeout,
@@ -9156,8 +9213,8 @@ function es(e2 = "", t2 = {}) {
   const n2 = t2.list, s2 = Qn(e2);
   return n2.some((e3) => e3.pagePath === s2);
 }
-const ts = !!t.uniIdRouter;
-const { loginPage: ns, routerNeedLogin: ss, resToLogin: rs, needLoginPage: is, notNeedLoginPage: os, loginPageInTabBar: as } = function({ pages: e2 = [], subPackages: n2 = [], uniIdRouter: s2 = {}, tabBar: r2 = {} } = t) {
+const ts = !!pagesJson.uniIdRouter;
+const { loginPage: ns, routerNeedLogin: ss, resToLogin: rs, needLoginPage: is, notNeedLoginPage: os, loginPageInTabBar: as } = function({ pages: e2 = [], subPackages: n2 = [], uniIdRouter: s2 = {}, tabBar: r2 = {} } = pagesJson) {
   const { loginPage: i2, needLogin: o2 = [], resToLogin: a2 = true } = s2, { needLoginPage: c2, notNeedLoginPage: u2 } = Yn(e2), { needLoginPage: l2, notNeedLoginPage: h2 } = function(e3 = []) {
     const t2 = [], n3 = [];
     return e3.forEach((e4) => {
@@ -9846,6 +9903,7 @@ var lodash_drop = drop;
 const createHook = (lifecycle) => (hook, target = getCurrentInstance()) => {
   !isInSSRComponentSetup && injectHook(lifecycle, hook, target);
 };
+const onShow = /* @__PURE__ */ createHook(ON_SHOW);
 const onLoad = /* @__PURE__ */ createHook(ON_LOAD);
 const onReachBottom = /* @__PURE__ */ createHook(ON_REACH_BOTTOM);
 const onPullDownRefresh = /* @__PURE__ */ createHook(ON_PULL_DOWN_REFRESH);
@@ -9856,21 +9914,26 @@ exports.createSSRApp = createSSRApp;
 exports.e = e;
 exports.f = f$1;
 exports.index = index;
+exports.initVueI18n = initVueI18n;
 exports.lodash_drop = lodash_drop;
 exports.lodash_dropright = lodash_dropright;
+exports.n = n$1;
 exports.o = o$1;
 exports.onBeforeMount = onBeforeMount;
 exports.onLoad = onLoad;
 exports.onMounted = onMounted;
 exports.onPullDownRefresh = onPullDownRefresh;
 exports.onReachBottom = onReachBottom;
+exports.onShow = onShow;
 exports.p = p$1;
+exports.pagesJson = pagesJson;
 exports.r = r$1;
+exports.reactive = reactive;
 exports.ref = ref;
 exports.resolveComponent = resolveComponent;
 exports.s = s$1;
 exports.sr = sr;
-exports.t = t$1;
+exports.t = t;
 exports.toRaw = toRaw;
 exports.unref = unref;
 exports.useCssVars = useCssVars;

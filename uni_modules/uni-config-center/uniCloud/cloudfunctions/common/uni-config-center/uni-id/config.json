@@ -4,10 +4,11 @@
         "version": 1
     }],
     "passwordStrength": "medium",
-    "tokenSecret": "booking123",
-    "requestAuthSecret": "booking123",
+    "tokenSecret": "jljlbygolas",
+    "requestAuthSecret": "zxwdewewss",
     "tokenExpiresIn": 7200,
     "tokenExpiresThreshold": 3600,
     "passwordErrorLimit": 6,
-    "passwordErrorRetryTime": 3600
+    "passwordErrorRetryTime": 3600,
+    "userRegisterDefaultRole": ["user"]
 }

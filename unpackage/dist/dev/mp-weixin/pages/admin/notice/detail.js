@@ -10,23 +10,37 @@ const _sfc_main = {
   __name: "detail",
   setup(__props) {
     const formData = common_vendor.ref({
-      title: "12",
-      content: "fddefe"
+      title: "",
+      content: ""
     });
     common_vendor.onLoad((options) => {
       common_vendor.index.setNavigationBarTitle({
         title: options.id ? "公告详情" : "新增公告"
       });
       if (options.id) {
+        formData.value._id = options.id;
         getDetail();
       }
     });
     const setFormData = (field, value) => {
       formData.value[field] = value;
     };
-    const getDetail = () => {
+    const getDetail = async () => {
+      const {
+        data
+      } = await common_vendor.Ls.importObject("notice").getItem({
+        _id: formData.value._id
+      });
+      console.log(data);
+      formData.value.title = data.title;
+      formData.value.content = data.content;
     };
-    const submit = () => {
+    const submit = async () => {
+      if (formData.value._id) {
+        await common_vendor.Ls.importObject("notice").updateItem(formData.value);
+      } else {
+        await common_vendor.Ls.importObject("notice").addItem(formData.value);
+      }
       common_vendor.index.navigateBack();
     };
     return (_ctx, _cache) => {
@@ -37,12 +51,12 @@ const _sfc_main = {
           value: formData.value.title,
           placeholder: "请输入"
         }),
-        c: common_vendor.o((e) => setFormData("title", e.detail)),
+        c: common_vendor.o((e) => setFormData("content", e.detail)),
         d: common_vendor.p({
           maxlength: 500,
           type: "textarea",
           label: "内容",
-          value: formData.value.title,
+          value: formData.value.content,
           placeholder: "请输入"
         }),
         e: common_vendor.o(submit),

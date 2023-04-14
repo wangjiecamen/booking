@@ -1,24 +1,36 @@
 <template>
     <view class="detail_page">
         <view class="title">{{detail.title}}</view>
-        <view class="update_time">发布时间：<text>{{detail.updateTime}}</text></view>
+        <view class="update_time">发布时间：<text>{{detail.update_time}}</text></view>
         <view class="content">{{detail.content}}</view>
     </view>
 </template>
 
 <script setup>
     import {
+        formatTimestamp
+    } from '@/utils/time.js'
+    import {
         ref
     } from "vue";
-
+    import {
+        onLoad
+    } from "@dcloudio/uni-app";
     const detail = ref({
-        title: '关于xxxxxde的通告',
-        content: '关于xxxxxde的通告关于xxxxxde的通告关于xxxxxde的通告关于xxxxxde的通告关于xxxxxde的通告关于xxxxxde的通告，关于xxxxxde的通告，关于xxxxxde的通告，关于xxxxxde的通告，关于xxxxxde的通告',
-        updateTime: "2020-03-12 23:33:20"
+        title: '',
+        content: '',
+        update_time: ""
     })
-    const getDetail = () => {
-
-    }
+    onLoad(async (options) => {
+        const {
+            data
+        } = await uniCloud.importObject('notice').getItem({
+            _id: options.id
+        })
+        detail.value.title = data.title
+        detail.value.content = data.content
+        detail.value.update_time = formatTimestamp(data.update_time)
+    })
 </script>
 
 <style lang="scss" scoped>

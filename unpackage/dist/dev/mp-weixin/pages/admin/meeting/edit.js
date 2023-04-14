@@ -12,22 +12,32 @@ const _sfc_main = {
   __name: "edit",
   setup(__props) {
     const formData = common_vendor.ref({
-      roomRoom: "",
+      name: "",
       audit: 0,
-      status: 0
+      status: 1
     });
     common_vendor.onLoad((options) => {
       common_vendor.index.setNavigationBarTitle({
         title: options.id ? "会议室详情" : "新增会议室"
       });
       if (options.id) {
+        formData.value._id = options.id;
         getDetail();
       }
     });
-    const getDetail = () => {
+    const getDetail = async () => {
+      const {
+        data
+      } = await common_vendor.Ls.importObject("room").getItem({
+        _id: formData.value._id
+      });
+      console.log(data);
+      formData.value.name = data.name;
+      formData.value.status = data.status;
+      formData.value.audit = data.audit;
     };
     const onChangeRoomName = (e) => {
-      formData.value.roomRoom = e.detail;
+      formData.value.name = e.detail;
     };
     const onChangeAudit = (e) => {
       formData.value.audit = e.detail;
@@ -35,8 +45,13 @@ const _sfc_main = {
     const onChangeStatus = (e) => {
       formData.value.status = e.detail;
     };
-    const submit = () => {
-      console.log(formData.value);
+    const submit = async () => {
+      if (formData.value._id) {
+        console.log(formData.value);
+        await common_vendor.Ls.importObject("room").updateItem(formData.value);
+      } else {
+        await common_vendor.Ls.importObject("room").addItem(formData.value);
+      }
       common_vendor.index.navigateBack();
     };
     return (_ctx, _cache) => {
@@ -44,7 +59,7 @@ const _sfc_main = {
         a: common_vendor.o(onChangeRoomName),
         b: common_vendor.p({
           label: "会议室名称",
-          value: formData.value.roomRoom,
+          value: formData.value.name,
           placeholder: "请输入"
         }),
         c: common_vendor.o(onChangeStatus),

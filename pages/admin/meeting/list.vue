@@ -1,14 +1,14 @@
 <template>
     <view class="meeting-page">
         <view v-if="list.length">
-            <van-swipe-cell :right-width="65" v-for="item in list" :key="item.id">
-                <view @click="goToDetail(id)" class="meeting-item">
-                    <view> {{item.roomName}}</view>
+            <van-swipe-cell :right-width="65" v-for="item in list" :key="item._id">
+                <view @click="goToDetail(item._id)" class="meeting-item">
+                    <view> {{item.name}}</view>
                     <view v-if="item.status===1" class="on">已启用</view>
                     <view v-else class="off">已禁用</view>
                 </view>
                 <view slot="right">
-                    <van-button @click.stop="onDelete(id)" square type="danger">删除</van-button>
+                    <van-button @click.stop="onDelete(item._id)" square type="danger">删除</van-button>
                 </view>
             </van-swipe-cell>
 
@@ -24,24 +24,36 @@
     } from "vue";
     import {
         onPullDownRefresh,
-        onReachBottom
+        onReachBottom,
+        onShow
     } from "@dcloudio/uni-app";
     import AddBtn from '@/components/AddBtn.vue'
     const fetched = ref(true)
     const pageNo = ref(1)
-    const list = ref([{
-        roomName: "亚马逊",
-        status: 0
-    }, {
-        roomName: "亚马22逊",
-        status: 1
-    }])
-
-    const getList = () => {
-
+    const list = ref([])
+    onShow(() => {
+        getList(true)
+    })
+    const getList = async (isRefresh = false) => {
+        if (isRefresh) pageNo.value = 1
+        fetched.value = false
+        const data = await uniCloud.importObject('room').getList({
+            pageNo: pageNo.value,
+            pageSize: 10
+        })
+        if (isRefresh) list.value = []
+        if (list.value.length < data.total) {
+            list.value.push(...data.data)
+        }
+        fetched.value = true
+        uni.stopPullDownRefresh()
+        console.log(data)
     }
-    const onDelete = (id) => {
-
+    const onDelete = async (id) => {
+        await uniCloud.importObject('room').deleteItem({
+            _id: id
+        })
+        getList(true)
     }
     const goToAdd = () => {
         uni.navigateTo({
@@ -57,9 +69,7 @@
         getList()
     })
     onPullDownRefresh(() => {
-        list.value = []
-        pageNo.value = 1
-        getList()
+        getList(true)
     })
 </script>
 

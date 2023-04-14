@@ -1,7 +1,9 @@
 <script>
+    import uniIdPageInit from '@/uni_modules/uni-id-pages/init.js';
     export default {
         onLaunch: async function() {
             console.log('App Launch')
+            await uniIdPageInit()
 
         },
         onShow: function() {
@@ -23,6 +25,20 @@
 
     view {
         box-sizing: border-box;
+    }
+
+    .primary_btn {
+        background-color: $uni-color-primary;
+    }
+
+    .default_btn {
+        text-align: center;
+        height: 40px;
+        line-height: 40px;
+        margin: 15px 0 10px 0;
+        color: #222 !important;
+        border-radius: 5px;
+        font-size: 16px;
     }
 
     /*每个页面公共css */

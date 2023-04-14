@@ -3,7 +3,9 @@ export const commonProps = {
         type: String,
         observer(value) {
             if (value !== this.value) {
-                this.setData({ innerValue: value });
+                this.setData({
+                    innerValue: value
+                });
                 this.value = value;
             }
         },

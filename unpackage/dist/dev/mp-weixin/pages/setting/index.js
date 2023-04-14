@@ -9,28 +9,54 @@ if (!Array) {
 const _sfc_main = {
   __name: "index",
   setup(__props) {
-    const logout = () => {
+    const info = common_vendor.ref({
+      branchName: "",
+      username: "",
+      nickname: "",
+      role: []
+    });
+    common_vendor.onMounted(async () => {
+      const user = common_vendor.Ls.getCurrentUserInfo();
+      const {
+        data
+      } = await common_vendor.Ls.importObject("user").getUserInfo(user.uid);
+      console.log(data);
+      info.value = data;
+    });
+    const logout = async () => {
+      if (common_vendor.Ls.getCurrentUserInfo().tokenExpired > Date.now()) {
+        try {
+          await common_vendor.Ls.importObject("uni-id-co").logout();
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      common_vendor.index.removeStorageSync("uni_id_token");
+      common_vendor.index.setStorageSync("uni_id_token_expired", 0);
       common_vendor.index.reLaunch({
-        url: "/pages/login/index"
+        url: "/uni_modules/uni-id-pages/pages/login/login-withpwd"
       });
     };
     return (_ctx, _cache) => {
       return {
         a: common_vendor.p({
           title: "账号名称",
-          value: "moby"
+          value: info.value.username
         }),
         b: common_vendor.p({
-          title: "角色",
-          value: "普通用户"
+          title: "昵称名称",
+          value: info.value.nickname
         }),
         c: common_vendor.p({
-          title: "所属部门",
-          value: "产品部"
+          title: "角色",
+          value: info.value.role.join(",")
         }),
-        d: common_vendor.o(logout),
-        e: common_vendor.p({
-          type: "danger",
+        d: common_vendor.p({
+          title: "所属部门",
+          value: info.value.branchName
+        }),
+        e: common_vendor.o(logout),
+        f: common_vendor.p({
           block: true,
           round: true
         })

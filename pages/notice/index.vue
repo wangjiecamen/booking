@@ -1,7 +1,7 @@
 <template>
     <view class="notice-page">
         <view v-if="list.length">
-            <view @click="goToDetail(id)" class="notice-item van-ellipsis" v-for="item in list" :key="item.id">
+            <view @click="goToDetail(item._id)" class="notice-item van-ellipsis" v-for="item in list" :key="item._id">
                 {{item.title}}
             </view>
         </view>
@@ -15,14 +15,29 @@
     } from "vue";
     import {
         onPullDownRefresh,
-        onReachBottom
+        onReachBottom,
+        onShow
     } from "@dcloudio/uni-app";
     const fetched = ref(true)
     const pageNo = ref(1)
     const list = ref([])
-
-    const getList = () => {
-
+    onShow(() => {
+        getList(true)
+    })
+    const getList = async (isRefresh = false) => {
+        if (isRefresh) pageNo.value = 1
+        fetched.value = false
+        const data = await uniCloud.importObject('notice').getList({
+            pageNo: pageNo.value,
+            pageSize: 10
+        })
+        if (isRefresh) list.value = []
+        if (list.value.length < data.total) {
+            list.value.push(...data.data)
+        }
+        fetched.value = true
+        uni.stopPullDownRefresh()
+        console.log(data)
     }
     const goToDetail = (id) => {
         uni.navigateTo({

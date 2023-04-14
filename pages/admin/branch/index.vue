@@ -1,14 +1,14 @@
 <template>
     <view class="branch-page">
         <view v-if="list.length">
-            <van-swipe-cell :right-width="65" v-for="item in list" :key="item.id">
-                <view @click="goToDetail(id)" class="branch-item">
-                    <view> {{item.branchName}}</view>
+            <van-swipe-cell :right-width="65" v-for="item in list" :key="item._id">
+                <view @click="goToDetail(item._id)" class="branch-item">
+                    <view> {{item.name}}</view>
                     <view v-if="item.status===1" class="on">已启用</view>
                     <view v-else class="off">已禁用</view>
                 </view>
                 <view slot="right">
-                    <van-button @click.stop="onDelete(id)" square type="danger">删除</van-button>
+                    <van-button @click.stop="onDelete(item._id)" square type="danger">删除</van-button>
                 </view>
             </van-swipe-cell>
 
@@ -21,32 +21,45 @@
 <script setup>
     import AddBtn from '@/components/AddBtn.vue'
     import {
+        onMounted,
         ref
     } from "vue";
     import {
         onPullDownRefresh,
         onReachBottom,
+        onShow
     } from "@dcloudio/uni-app";
-
     const fetched = ref(true)
     const pageNo = ref(1)
-    const list = ref([{
-        branchName: "亚马逊",
-        status: 0
-    }, {
-        branchName: "亚马22逊",
-        status: 1
-    }])
+    const list = ref([])
     const goToAdd = () => {
         uni.navigateTo({
             url: `/pages/admin/branch/edit`
         })
     }
-    const onDelete = (id) => {
-
+    const onDelete = async (id) => {
+        await uniCloud.importObject('branch').deleteItem({
+            _id: id
+        })
+        getList(true)
     }
-    const getList = () => {
-
+    onShow(() => {
+        getList(true)
+    })
+    const getList = async (isRefresh = false) => {
+        if (isRefresh) pageNo.value = 1
+        fetched.value = false
+        const data = await uniCloud.importObject('branch').getList({
+            pageNo: pageNo.value,
+            pageSize: 10
+        })
+        if (isRefresh) list.value = []
+        if (list.value.length < data.total) {
+            list.value.push(...data.data)
+        }
+        fetched.value = true
+        uni.stopPullDownRefresh()
+        console.log(data)
     }
     const goToDetail = (id) => {
         uni.navigateTo({
@@ -57,9 +70,7 @@
         getList()
     })
     onPullDownRefresh(() => {
-        list.value = []
-        pageNo.value = 1
-        getList()
+        getList(true)
     })
 </script>
 

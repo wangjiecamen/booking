@@ -15,14 +15,32 @@ const _sfc_main = {
   setup(__props) {
     const fetched = common_vendor.ref(true);
     const pageNo = common_vendor.ref(1);
-    const list = common_vendor.ref([{
-      roomName: "亚马逊",
-      status: 0
-    }, {
-      roomName: "亚马22逊",
-      status: 1
-    }]);
-    const onDelete = (id) => {
+    const list = common_vendor.ref([]);
+    common_vendor.onShow(() => {
+      getList(true);
+    });
+    const getList = async (isRefresh = false) => {
+      if (isRefresh)
+        pageNo.value = 1;
+      fetched.value = false;
+      const data = await common_vendor.Ls.importObject("room").getList({
+        pageNo: pageNo.value,
+        pageSize: 10
+      });
+      if (isRefresh)
+        list.value = [];
+      if (list.value.length < data.total) {
+        list.value.push(...data.data);
+      }
+      fetched.value = true;
+      common_vendor.index.stopPullDownRefresh();
+      console.log(data);
+    };
+    const onDelete = async (id) => {
+      await common_vendor.Ls.importObject("room").deleteItem({
+        _id: id
+      });
+      getList(true);
     };
     const goToAdd = () => {
       common_vendor.index.navigateTo({
@@ -35,10 +53,10 @@ const _sfc_main = {
       });
     };
     common_vendor.onReachBottom(() => {
+      getList();
     });
     common_vendor.onPullDownRefresh(() => {
-      list.value = [];
-      pageNo.value = 1;
+      getList(true);
     });
     return (_ctx, _cache) => {
       return common_vendor.e({
@@ -46,13 +64,13 @@ const _sfc_main = {
       }, list.value.length ? {
         b: common_vendor.f(list.value, (item, k0, i0) => {
           return common_vendor.e({
-            a: common_vendor.t(item.roomName),
+            a: common_vendor.t(item.name),
             b: item.status === 1
           }, item.status === 1 ? {} : {}, {
-            c: common_vendor.o(($event) => goToDetail(_ctx.id), item.id),
-            d: common_vendor.o(($event) => onDelete(_ctx.id), item.id),
+            c: common_vendor.o(($event) => goToDetail(item._id), item._id),
+            d: common_vendor.o(($event) => onDelete(item._id), item._id),
             e: "7f544613-1-" + i0 + "," + ("7f544613-0-" + i0),
-            f: item.id,
+            f: item._id,
             g: "7f544613-0-" + i0
           });
         }),

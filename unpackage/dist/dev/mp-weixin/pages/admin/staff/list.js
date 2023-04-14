@@ -15,15 +15,32 @@ const _sfc_main = {
   setup(__props) {
     const fetched = common_vendor.ref(true);
     const pageNo = common_vendor.ref(1);
-    const list = common_vendor.ref([{
-      userName: "亚马逊",
-      status: 0
-    }, {
-      userName: "亚马22逊",
-      status: 1
-    }]);
-    const onDelete = (id) => {
-      console.log(id);
+    const list = common_vendor.ref([]);
+    common_vendor.onShow(() => {
+      getList(true);
+    });
+    const getList = async (isRefresh = false) => {
+      if (isRefresh)
+        pageNo.value = 1;
+      fetched.value = false;
+      const data = await common_vendor.Ls.importObject("staff").getList({
+        pageNo: pageNo.value,
+        pageSize: 10
+      });
+      if (isRefresh)
+        list.value = [];
+      if (list.value.length < data.total) {
+        list.value.push(...data.data);
+      }
+      fetched.value = true;
+      common_vendor.index.stopPullDownRefresh();
+      console.log(data);
+    };
+    const onDelete = async (id) => {
+      await common_vendor.Ls.importObject("staff").deleteItem({
+        _id: id
+      });
+      getList(true);
     };
     const goToAdd = () => {
       common_vendor.index.navigateTo({
@@ -36,10 +53,12 @@ const _sfc_main = {
       });
     };
     common_vendor.onReachBottom(() => {
+      getList();
     });
     common_vendor.onPullDownRefresh(() => {
       list.value = [];
       pageNo.value = 1;
+      getList();
     });
     return (_ctx, _cache) => {
       return common_vendor.e({
@@ -47,13 +66,13 @@ const _sfc_main = {
       }, list.value.length ? {
         b: common_vendor.f(list.value, (item, k0, i0) => {
           return common_vendor.e({
-            a: common_vendor.t(item.userName),
-            b: item.status === 1
-          }, item.status === 1 ? {} : {}, {
-            c: common_vendor.o(($event) => goToDetail(_ctx.id), item.id),
-            d: common_vendor.o(($event) => onDelete(_ctx.id), item.id),
+            a: common_vendor.t(item.username),
+            b: item.status === 0
+          }, item.status === 0 ? {} : {}, {
+            c: common_vendor.o(($event) => goToDetail(item._id), item._id),
+            d: common_vendor.o(($event) => onDelete(item._id), item._id),
             e: "a19e3bd9-1-" + i0 + "," + ("a19e3bd9-0-" + i0),
-            f: item.id,
+            f: item._id,
             g: "a19e3bd9-0-" + i0
           });
         }),
@@ -68,7 +87,7 @@ const _sfc_main = {
         e: fetched.value && !list.value.length
       }, fetched.value && !list.value.length ? {
         f: common_vendor.p({
-          description: "暂无部门记录"
+          description: "暂无员工记录"
         })
       } : {}, {
         g: common_vendor.o(goToAdd)

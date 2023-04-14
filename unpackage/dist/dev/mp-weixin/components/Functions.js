@@ -4,13 +4,13 @@ const contants = require("../contants.js");
 const _sfc_main = {
   __name: "Functions",
   setup(__props) {
-    const userType = common_vendor.index.getStorageSync("USER_TYPE") || 1;
     const functions = common_vendor.ref([]);
     common_vendor.onBeforeMount(() => {
-      console.log(userType);
-      if (userType === 0)
+      console.log(common_vendor.Ls.getCurrentUserInfo().role[0]);
+      const userType = common_vendor.Ls.getCurrentUserInfo().role[0];
+      if (userType === "admin")
         functions.value = contants.adminFunctions;
-      if (userType === 1)
+      if (userType === "user")
         functions.value = contants.userFunctions;
     });
     const goTo = (b) => {

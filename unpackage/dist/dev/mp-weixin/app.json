@@ -1,7 +1,6 @@
 {
   "pages": [
-    "pages/login/index",
-    "pages/register/index",
+    "uni_modules/uni-id-pages/pages/login/login-withpwd",
     "pages/index/index",
     "pages/setting/index",
     "pages/meeting/index",
@@ -19,7 +18,11 @@
     "pages/admin/staff/list",
     "pages/admin/staff/edit",
     "pages/admin/notice/detail",
-    "pages/admin/notice/index"
+    "pages/admin/notice/index",
+    "uni_modules/uni-id-pages/pages/userinfo/userinfo",
+    "uni_modules/uni-id-pages/pages/register/register",
+    "uni_modules/uni-id-pages/pages/common/webview/webview",
+    "uni_modules/uni-id-pages/pages/register/register-admin"
   ],
   "usingComponents": {
     "van-button": "/wxcomponents/vant/button",
@@ -30,7 +33,8 @@
     "van-empty": "/wxcomponents/vant/empty/index",
     "van-swipe-cell": "/wxcomponents/vant/swipe-cell/index",
     "van-popup": "/wxcomponents/vant/popup/index",
-    "van-icon": "/wxcomponents/vant/icon/index"
+    "van-icon": "/wxcomponents/vant/icon/index",
+    "van-picker": "/wxcomponents/vant/picker/index"
   },
   "window": {
     "navigationBarTextStyle": "white",

@@ -1,31 +1,66 @@
-import { nextTick } from '../common/utils';
-import { VantComponent } from '../common/component';
-import { commonProps, inputProps, textareaProps } from './props';
+import {
+    nextTick
+} from '../common/utils';
+import {
+    VantComponent
+} from '../common/component';
+import {
+    commonProps,
+    inputProps,
+    textareaProps
+} from './props';
 VantComponent({
     field: true,
     classes: ['input-class', 'right-icon-class', 'label-class'],
-    props: Object.assign(Object.assign(Object.assign(Object.assign({}, commonProps), inputProps), textareaProps), { size: String, icon: String, label: String, error: Boolean, center: Boolean, isLink: Boolean, leftIcon: String, rightIcon: String, autosize: null, required: Boolean, iconClass: String, clickable: Boolean, inputAlign: String, customStyle: String, errorMessage: String, arrowDirection: String, showWordLimit: Boolean, errorMessageAlign: String, readonly: {
-            type: Boolean,
-            observer: 'setShowClear',
-        }, clearable: {
-            type: Boolean,
-            observer: 'setShowClear',
-        }, clearTrigger: {
-            type: String,
-            value: 'focus',
-        }, border: {
-            type: Boolean,
-            value: true,
-        }, titleWidth: {
-            type: String,
-            value: '6.2em',
-        }, clearIcon: {
-            type: String,
-            value: 'clear',
-        }, extraEventParams: {
-            type: Boolean,
-            value: false,
-        } }),
+    props: Object.assign(Object.assign(Object.assign(Object.assign({}, commonProps), inputProps),
+        textareaProps), {
+            size: String,
+            icon: String,
+            label: String,
+            error: Boolean,
+            center: Boolean,
+            isLink: Boolean,
+            leftIcon: String,
+            rightIcon: String,
+            autosize: null,
+            required: Boolean,
+            iconClass: String,
+            clickable: Boolean,
+            inputAlign: String,
+            customStyle: String,
+            errorMessage: String,
+            arrowDirection: String,
+            showWordLimit: Boolean,
+            errorMessageAlign: String,
+            readonly: {
+                type: Boolean,
+                observer: 'setShowClear',
+            },
+            clearable: {
+                type: Boolean,
+                observer: 'setShowClear',
+            },
+            clearTrigger: {
+                type: String,
+                value: 'focus',
+            },
+            border: {
+                type: Boolean,
+                value: true,
+            },
+            titleWidth: {
+                type: String,
+                value: '6.2em',
+            },
+            clearIcon: {
+                type: String,
+                value: 'clear',
+            },
+            extraEventParams: {
+                type: Boolean,
+                value: false,
+            }
+        }),
     data: {
         focused: false,
         innerValue: '',
@@ -33,11 +68,15 @@ VantComponent({
     },
     created() {
         this.value = this.data.value;
-        this.setData({ innerValue: this.value });
+        this.setData({
+            innerValue: this.value
+        });
     },
     methods: {
         onInput(event) {
-            const { value = '' } = event.detail || {};
+            const {
+                value = ''
+            } = event.detail || {};
             this.value = value;
             this.setShowClear();
             this.emitChange(event.detail);
@@ -59,16 +98,22 @@ VantComponent({
             this.$emit('click-input', event.detail);
         },
         onClear() {
-            this.setData({ innerValue: '' });
+            this.setData({
+                innerValue: ''
+            });
             this.value = '';
             this.setShowClear();
             nextTick(() => {
-                this.emitChange({ value: '' });
+                this.emitChange({
+                    value: ''
+                });
                 this.$emit('clear', '');
             });
         },
         onConfirm(event) {
-            const { value = '' } = event.detail || {};
+            const {
+                value = ''
+            } = event.detail || {};
             this.value = value;
             this.setShowClear();
             this.$emit('confirm', value);
@@ -77,9 +122,13 @@ VantComponent({
             this.value = value;
             this.setShowClear();
             if (value === '') {
-                this.setData({ innerValue: '' });
+                this.setData({
+                    innerValue: ''
+                });
             }
-            this.emitChange({ value });
+            this.emitChange({
+                value
+            });
         },
         onLineChange(event) {
             this.$emit('linechange', event.detail);
@@ -88,8 +137,12 @@ VantComponent({
             this.$emit('keyboardheightchange', event.detail);
         },
         emitChange(detail) {
-            const { extraEventParams } = this.data;
-            this.setData({ value: detail.value });
+            const {
+                extraEventParams
+            } = this.data;
+            this.setData({
+                value: detail.value
+            });
             nextTick(() => {
                 const data = extraEventParams ? detail : detail.value;
                 this.$emit('input', data);
@@ -97,16 +150,25 @@ VantComponent({
             });
         },
         setShowClear() {
-            const { clearable, readonly, clearTrigger } = this.data;
-            const { focused, value } = this;
+            const {
+                clearable,
+                readonly,
+                clearTrigger
+            } = this.data;
+            const {
+                focused,
+                value
+            } = this;
             let showClear = false;
             if (clearable && !readonly) {
                 const hasValue = !!value;
                 const trigger = clearTrigger === 'always' || (clearTrigger === 'focus' && focused);
                 showClear = hasValue && trigger;
             }
-            this.setData({ showClear });
+            this.setData({
+                showClear
+            });
         },
-        noop() { },
+        noop() {},
     },
 });

@@ -1,32 +1,24 @@
 {
     "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-
         {
-            "path": "pages/login/index",
+            "path": "uni_modules/uni-id-pages/pages/login/login-withpwd",
             "style": {
-                "navigationBarTitleText": "登录"
-            }
-        },
-        {
-            "path": "pages/register/index",
-            "style": {
-                "navigationBarTitleText": "注册",
-                "usingComponents": {
-                    "van-picker": "/wxcomponents/vant/picker/index"
-                }
+                "navigationBarTitleText": ""
             }
         },
         {
             "path": "pages/index/index",
             "style": {
                 "navigationBarTitleText": "首页"
-            }
+            },
+            "needLogin": true
         },
         {
             "path": "pages/setting/index",
             "style": {
                 "navigationBarTitleText": "我的"
-            }
+            },
+            "needLogin": true
         },
 
         {
@@ -36,16 +28,18 @@
                 "usingComponents": {
                     "van-dialog": "/wxcomponents/vant/dialog/index"
                 }
-            }
+            },
+            "needLogin": true
         },
         {
             "path": "pages/meeting/submit",
             "style": {
                 "navigationBarTitleText": "预约会议室",
                 "usingComponents": {
-                    "van-picker": "/wxcomponents/vant/picker/index"
+
                 }
-            }
+            },
+            "needLogin": true
         },
         {
             "path": "pages/notice/index",
@@ -54,13 +48,15 @@
                 "enablePullDownRefresh": true,
                 "onReachBottomDistance": 80
 
-            }
+            },
+            "needLogin": true
         },
         {
             "path": "pages/notice/detail",
             "style": {
                 "navigationBarTitleText": "公告详情"
-            }
+            },
+            "needLogin": true
         },
         {
             "path": "pages/meeting-record/index",
@@ -69,13 +65,15 @@
                 "enablePullDownRefresh": true,
                 "onReachBottomDistance": 80
 
-            }
+            },
+            "needLogin": true
         },
         {
             "path": "pages/meeting-record/detail",
             "style": {
                 "navigationBarTitleText": "会议详情"
-            }
+            },
+            "needLogin": true
         },
         {
             "path": "pages/admin/branch/index",
@@ -84,13 +82,15 @@
                 "enablePullDownRefresh": true,
                 "onReachBottomDistance": 80
 
-            }
+            },
+            "needLogin": true
         },
         {
             "path": "pages/admin/branch/edit",
             "style": {
                 "navigationBarTitleText": ""
-            }
+            },
+            "needLogin": true
         },
         {
             "path": "pages/admin/meeting/approve",
@@ -98,13 +98,15 @@
                 "navigationBarTitleText": "会议室审批列表",
                 "enablePullDownRefresh": true,
                 "onReachBottomDistance": 80
-            }
+            },
+            "needLogin": true
         },
         {
             "path": "pages/admin/meeting/approveDetail",
             "style": {
                 "navigationBarTitleText": "审批详情"
-            }
+            },
+            "needLogin": true
         },
         {
             "path": "pages/admin/meeting/list",
@@ -113,13 +115,15 @@
                 "enablePullDownRefresh": true,
                 "onReachBottomDistance": 80
 
-            }
+            },
+            "needLogin": true
         },
         {
             "path": "pages/admin/meeting/edit",
             "style": {
                 "navigationBarTitleText": ""
-            }
+            },
+            "needLogin": true
         },
 
         {
@@ -128,22 +132,25 @@
                 "navigationBarTitleText": "员工管理",
                 "enablePullDownRefresh": true,
                 "onReachBottomDistance": 80
-            }
+            },
+            "needLogin": true
         },
         {
             "path": "pages/admin/staff/edit",
             "style": {
                 "navigationBarTitleText": "",
                 "usingComponents": {
-                    "van-picker": "/wxcomponents/vant/picker/index"
+
                 }
-            }
+            },
+            "needLogin": true
         },
         {
             "path": "pages/admin/notice/detail",
             "style": {
                 "navigationBarTitleText": ""
-            }
+            },
+            "needLogin": true
         },
         {
             "path": "pages/admin/notice/index",
@@ -151,6 +158,30 @@
                 "navigationBarTitleText": "公告列表",
                 "enablePullDownRefresh": true,
                 "onReachBottomDistance": 80
+            },
+            "needLogin": true
+        }, {
+            "path": "uni_modules/uni-id-pages/pages/userinfo/userinfo",
+            "style": {
+                "navigationBarTitleText": "个人资料"
+            },
+            "needLogin": true
+        }, {
+            "path": "uni_modules/uni-id-pages/pages/register/register",
+            "style": {
+                "navigationBarTitleText": "注册"
+            }
+        }, {
+            "path": "uni_modules/uni-id-pages/pages/common/webview/webview",
+            "style": {
+                "enablePullDownRefresh": false,
+                "navigationBarTitleText": ""
+            }
+        }, {
+            "path": "uni_modules/uni-id-pages/pages/register/register-admin",
+            "style": {
+                "enablePullDownRefresh": false,
+                "navigationBarTitleText": "注册管理员账号"
             }
         }
     ],
@@ -196,8 +227,12 @@
             "van-empty": "/wxcomponents/vant/empty/index",
             "van-swipe-cell": "/wxcomponents/vant/swipe-cell/index",
             "van-popup": "/wxcomponents/vant/popup/index",
-            "van-icon": "/wxcomponents/vant/icon/index"
+            "van-icon": "/wxcomponents/vant/icon/index",
+            "van-picker": "/wxcomponents/vant/picker/index"
         }
     },
-    "uniIdRouter": {}
+    "uniIdRouter": {
+        "loginPage": "uni_modules/uni-id-pages/pages/login/login-withpwd",
+        "resToLogin": true
+    }
 }
