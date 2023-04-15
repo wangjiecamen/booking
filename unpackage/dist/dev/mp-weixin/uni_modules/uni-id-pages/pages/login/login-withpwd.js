@@ -82,7 +82,6 @@ const _sfc_main = {
         const {
           data: data2
         } = await common_vendor.Ls.importObject("user").getUserInfo(user.uid);
-        console.log(data2, "999999");
         common_vendor.index.setStorageSync("userinfo", data2);
       }).catch((e) => {
         if (e.errCode == "uni-id-captcha-required") {

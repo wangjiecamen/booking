@@ -357,6 +357,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/admin/meeting/approve",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

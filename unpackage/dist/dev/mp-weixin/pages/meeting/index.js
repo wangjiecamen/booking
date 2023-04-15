@@ -42,6 +42,7 @@ const _sfc_main = {
     });
     const selectDate = (index) => {
       currentDateIndex.value = index;
+      getList();
     };
     const onTimeScroll = (event) => {
       scrollTop.value = -event.detail.scrollTop;
@@ -73,6 +74,8 @@ const _sfc_main = {
       });
     };
     const goToDetail = (cell) => {
+      if (utils_user.isAdmin())
+        return;
       const currentBranchId = utils_user.getUserInfo().branchId;
       if (cell.defaultSelected) {
         const type = currentBranchId === cell.branch_id ? "edit" : "detail";
@@ -90,19 +93,19 @@ const _sfc_main = {
         lastCells.forEach((i) => i.selected = false);
         completeCellSelected = false;
       } else {
-        const index = timeList.findIndex((i2) => i2 === cell.time);
+        const currentIndex = timeList.findIndex((i2) => i2 === cell.time);
         if (completeCellSelected) {
-          currentRowCells.forEach((_, i2) => currentRowCells[i2].selected = i2 === index);
+          currentRowCells.forEach((_, i2) => currentRowCells[i2].selected = i2 === currentIndex);
           completeCellSelected = false;
           lastCellSelectedByTapCell = cell;
           return;
         }
         const lastIndex = timeList.findIndex((i2) => i2 === lastCellSelectedByTapCell.time);
-        const minIndex = Math.min(lastIndex, index);
-        const maxIndex = Math.max(lastIndex, index);
+        const minIndex = Math.min(lastIndex, currentIndex);
+        const maxIndex = Math.max(lastIndex, currentIndex);
         let i = minIndex;
         while (maxIndex - i > 0) {
-          if (currentRowCells[i].defaultSelected && currentRowCells[i].branch_id && currentBranchId !== currentRowCells[i].branch_id) {
+          if (currentRowCells[i].defaultSelected && currentRowCells[i].branch_id && currentBranchId && currentBranchId !== currentRowCells[i].branch_id) {
             wxcomponents_vant_dialog_dialog.Dialog.confirm({
               showCancelButton: false,
               message: `会议室已被其他部门占用，请重新选择`
@@ -116,7 +119,6 @@ const _sfc_main = {
           console.log(i);
           currentRowCells[i].selected = true;
         }
-        console.log(currentRowCells);
         completeCellSelected = true;
       }
       lastCellSelectedByTapCell = cell;
@@ -270,8 +272,8 @@ const _sfc_main = {
           id: "van-dialog"
         }),
         i: common_vendor.s(_ctx.__cssVars()),
-        j: showSubmitBtn.value
-      }, showSubmitBtn.value ? {
+        j: showSubmitBtn.value && common_vendor.unref(utils_user.isUser)()
+      }, showSubmitBtn.value && common_vendor.unref(utils_user.isUser)() ? {
         k: common_vendor.o(submit),
         l: common_vendor.s(_ctx.__cssVars())
       } : {});

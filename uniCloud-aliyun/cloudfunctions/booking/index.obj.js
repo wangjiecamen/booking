@@ -16,8 +16,9 @@ module.exports = {
             })
             .skip((pageNo - 1) * pageSize)
             .limit(pageSize)
+            .orderBy('update_time desc')
             .get({
-                getCount: true
+                getCount: true,
             })
         return {
             errCode: 0,

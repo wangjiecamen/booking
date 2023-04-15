@@ -38,7 +38,7 @@
 
         <van-dialog id="van-dialog" />
     </div>
-    <add-btn v-if="showSubmitBtn" @on-click="submit">确定</add-btn>
+    <add-btn v-if="showSubmitBtn&&isUser()" @on-click="submit">确定</add-btn>
 
 
 </template>
@@ -55,7 +55,9 @@
         getTimeList
     } from '../../utils/date'
     import {
-        getUserInfo
+        getUserInfo,
+        isUser,
+        isAdmin
     } from '@/utils/user'
     import {
         onShow,
@@ -89,6 +91,7 @@
     })
     const selectDate = (index) => {
         currentDateIndex.value = index
+        getList()
     }
     const onTimeScroll = (event) => {
         scrollTop.value = -(event.detail.scrollTop)
@@ -118,6 +121,7 @@
         })
     }
     const goToDetail = (cell) => {
+        if (isAdmin()) return
         const currentBranchId = getUserInfo().branchId
         if (cell.defaultSelected) {
             const type = currentBranchId === cell.branch_id ? 'edit' : 'detail'
@@ -136,21 +140,21 @@
             lastCells.forEach(i => i.selected = false)
             completeCellSelected = false
         } else {
-            const index = timeList.findIndex(i => i === cell.time)
+            const currentIndex = timeList.findIndex(i => i === cell.time)
             if (completeCellSelected) {
-                currentRowCells.forEach((_, i) => currentRowCells[i].selected = i === index)
+                currentRowCells.forEach((_, i) => currentRowCells[i].selected = i === currentIndex)
                 completeCellSelected = false
                 lastCellSelectedByTapCell = cell
                 return
             }
             const lastIndex = timeList.findIndex(i => i === lastCellSelectedByTapCell.time)
-            const minIndex = Math.min(lastIndex, index)
-            const maxIndex = Math.max(lastIndex, index)
+            const minIndex = Math.min(lastIndex, currentIndex)
+            const maxIndex = Math.max(lastIndex, currentIndex)
             let i = minIndex
             while (maxIndex - i > 0) {
                 if (currentRowCells[i].defaultSelected &&
                     currentRowCells[i].branch_id &&
-                    currentBranchId !==
+                    currentBranchId && currentBranchId !==
                     currentRowCells[i].branch_id) {
                     Dialog.confirm({
                         showCancelButton: false,
@@ -165,11 +169,9 @@
                 console.log(i)
                 currentRowCells[i].selected = true
             }
-            console.log(currentRowCells)
             completeCellSelected = true
         }
         lastCellSelectedByTapCell = cell
-
         showSubmitBtn.value = true
     }
 
@@ -200,12 +202,10 @@
 
             let i = minIndex
             while (maxIndex - i > 0) {
-
                 for (let k of roomList.value) {
                     k.cell[i].selectedByTapTime = true
                 }
                 i++
-
             }
             completeTimeSelected = true
         }

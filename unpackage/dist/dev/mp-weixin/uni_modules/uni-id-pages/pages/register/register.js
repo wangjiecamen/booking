@@ -12,10 +12,10 @@ const _sfc_main = {
   data() {
     return {
       formData: {
-        username: "moby1",
-        nickname: "biyw",
-        password: "wangjie1739",
-        password2: "wangjie1739",
+        username: "",
+        nickname: "",
+        password: "",
+        password2: "",
         captcha: "",
         department_id: ""
       },
@@ -24,10 +24,7 @@ const _sfc_main = {
       focusNickname: false,
       focusPassword: false,
       focusPassword2: false,
-      branchList: [{
-        text: "产品部",
-        value: "232499812"
-      }],
+      branchList: [],
       branchName: "",
       showPicker: false
     };
