@@ -49,6 +49,12 @@ const _sfc_main = {
     };
     const submit = () => {
       const cells = currentRowCells.filter((i) => i.selected);
+      const existMeetingIds = /* @__PURE__ */ new Set();
+      cells.forEach((i) => {
+        if (i.defaultSelected)
+          existMeetingIds.add(i.id);
+      });
+      console.log(existMeetingIds);
       const startTime = cells[0].time;
       let endTime = cells[cells.length - 1].time;
       const [e, e_h] = endTime.split(":");
@@ -56,29 +62,41 @@ const _sfc_main = {
         endTime = e + ":30";
       if (e_h === "30")
         endTime = Number(e) + 1 + ":00";
-      const userinfo = common_vendor.index.getStorageSync("userinfo");
-      const result = {
-        room_id: cells[0].roomId,
-        audit: cells[0].roomAudit,
-        start_time: startTime,
-        end_time: endTime,
-        date: date.value,
-        room_name: cells[0].roomName,
-        branch_name: userinfo.branchName,
-        branch_id: userinfo.branchId,
-        user_id: userinfo._id,
-        user_name: userinfo.username
-      };
-      common_vendor.index.navigateTo({
-        url: `/pages/meeting-record/detail?form=${encodeURIComponent(JSON.stringify(result))}`
-      });
+      if (existMeetingIds.size === 0) {
+        const userinfo = common_vendor.index.getStorageSync("userinfo");
+        const result = {
+          room_id: cells[0].roomId,
+          audit: cells[0].roomAudit,
+          start_time: startTime,
+          end_time: endTime,
+          date: date.value,
+          room_name: cells[0].roomName,
+          branch_name: userinfo.branchName,
+          branch_id: userinfo.branchId,
+          user_id: userinfo._id,
+          user_name: userinfo.username
+        };
+        common_vendor.index.navigateTo({
+          url: `/pages/meeting-record/detail?form=${encodeURIComponent(JSON.stringify(result))}`
+        });
+      } else if (existMeetingIds.size === 1) {
+        const id = existMeetingIds.values().next().value;
+        common_vendor.index.navigateTo({
+          url: `/pages/meeting-record/detail?id=${id}&type=edit&end_time=${endTime}&start_time=${startTime}`
+        });
+      } else {
+        return wxcomponents_vant_dialog_dialog.Dialog.confirm({
+          showCancelButton: false,
+          message: `已存在多个会议，不可修改`
+        });
+      }
     };
     const goToDetail = (cell) => {
       if (utils_user.isAdmin())
         return;
-      const currentBranchId = utils_user.getUserInfo().branchId;
+      const currentUserId = utils_user.getUserInfo()._id;
       if (cell.defaultSelected) {
-        const type = currentBranchId === cell.branch_id ? "edit" : "detail";
+        const type = currentUserId === cell.user_id ? "edit" : "detail";
         common_vendor.index.navigateTo({
           url: `/pages/meeting-record/detail?id=${cell.id}&type=${type}`
         });
@@ -172,6 +190,7 @@ const _sfc_main = {
             branch_name: i.branch_name,
             branch_id: i.branch_id,
             remark: i.remark,
+            user_id: i.user_id,
             time: t
           }));
           arr.push(...item);
@@ -187,9 +206,14 @@ const _sfc_main = {
         i.cell = [];
         const t = getCellOfMeeting(i.meeting);
         let count = 0;
+        let lastMeetingId = "";
+        let currentMeetingId = "";
         for (let k of timeList) {
           const targetIndex = t.findIndex((i2) => i2.time === k);
           if (targetIndex !== -1) {
+            currentMeetingId = t[targetIndex].id;
+            if (lastMeetingId !== currentMeetingId)
+              count = 0;
             count++;
             i.cell.push({
               ...count == 1 && {
@@ -204,9 +228,11 @@ const _sfc_main = {
               id: t[targetIndex].id,
               branch_name: t[targetIndex].branch_name,
               branch_id: t[targetIndex].branch_id,
+              user_id: t[targetIndex].user_id,
               remark: t[targetIndex].remark,
               selectedByTapTime: false
             });
+            lastMeetingId = currentMeetingId;
           } else {
             count = 0;
             i.cell.push({
@@ -222,8 +248,10 @@ const _sfc_main = {
         }
         return i;
       });
+      console.log(roomList.value);
     };
     common_vendor.onShow(() => {
+      console.log("on show....");
       getList();
     });
     return (_ctx, _cache) => {

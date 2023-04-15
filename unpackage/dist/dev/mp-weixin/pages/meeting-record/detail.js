@@ -31,15 +31,18 @@ const _sfc_main = {
       branch_name: "",
       doc_url: ""
     });
-    common_vendor.onLoad((options) => {
-      console.log(options);
+    common_vendor.onLoad(async (options) => {
       common_vendor.index.setNavigationBarTitle({
         title: options.id ? "会议详情" : "新增会议"
       });
       if (options.id) {
         readonly.value = options.type === "detail";
         formData.value._id = options.id;
-        getDetail();
+        await getDetail();
+        if (options.start_time)
+          formData.value.start_time = options.start_time;
+        if (options.end_time)
+          formData.value.end_time = options.end_time;
       } else {
         formData.value = JSON.parse(decodeURIComponent(options.form));
       }

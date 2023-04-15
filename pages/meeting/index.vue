@@ -98,33 +98,55 @@
     }
     const submit = () => {
         const cells = currentRowCells.filter(i => i.selected)
+        const existMeetingIds = new Set()
+        cells.forEach(i => {
+            if (i.defaultSelected) existMeetingIds.add(i.id)
+        })
+        console.log(existMeetingIds)
         const startTime = cells[0].time
         let endTime = cells[cells.length - 1].time
         const [e, e_h] = endTime.split(":")
         if (e_h === '00') endTime = e + ':30'
         if (e_h === '30') endTime = Number(e) + 1 + ':00'
-        const userinfo = uni.getStorageSync('userinfo')
-        const result = {
-            room_id: cells[0].roomId,
-            audit: cells[0].roomAudit,
-            start_time: startTime,
-            end_time: endTime,
-            date: date.value,
-            room_name: cells[0].roomName,
-            branch_name: userinfo.branchName,
-            branch_id: userinfo.branchId,
-            user_id: userinfo._id,
-            user_name: userinfo.username,
+        if (existMeetingIds.size === 0) {
+            //新增
+            const userinfo = uni.getStorageSync('userinfo')
+            const result = {
+                room_id: cells[0].roomId,
+                audit: cells[0].roomAudit,
+                start_time: startTime,
+                end_time: endTime,
+                date: date.value,
+                room_name: cells[0].roomName,
+                branch_name: userinfo.branchName,
+                branch_id: userinfo.branchId,
+                user_id: userinfo._id,
+                user_name: userinfo.username,
+            }
+            uni.navigateTo({
+                url: `/pages/meeting-record/detail?form=${encodeURIComponent(JSON.stringify(result))}`
+            })
+        } else if (existMeetingIds.size === 1) {
+            //编辑
+            const id = existMeetingIds.values().next().value
+            uni.navigateTo({
+                url: `/pages/meeting-record/detail?id=${id}&type=edit&end_time=${endTime}&start_time=${startTime}`
+            })
+        } else {
+            return Dialog.confirm({
+                showCancelButton: false,
+                message: `已存在多个会议，不可修改`,
+            })
         }
-        uni.navigateTo({
-            url: `/pages/meeting-record/detail?form=${encodeURIComponent(JSON.stringify(result))}`
-        })
+
+
     }
     const goToDetail = (cell) => {
         if (isAdmin()) return
-        const currentBranchId = getUserInfo().branchId
+        const currentUserId = getUserInfo()._id
         if (cell.defaultSelected) {
-            const type = currentBranchId === cell.branch_id ? 'edit' : 'detail'
+            //会议发起人可前往编辑
+            const type = currentUserId === cell.user_id ? 'edit' : 'detail'
             uni.navigateTo({
                 url: `/pages/meeting-record/detail?id=${cell.id}&type=${type}`
             })
@@ -226,6 +248,7 @@
                     branch_name: i.branch_name,
                     branch_id: i.branch_id,
                     remark: i.remark,
+                    user_id: i.user_id,
                     time: t
                 }))
                 arr.push(...item)
@@ -242,10 +265,13 @@
             i.cell = []
             const t = getCellOfMeeting(i.meeting)
             let count = 0
+            let lastMeetingId = ''
+            let currentMeetingId = ''
             for (let k of timeList) {
                 const targetIndex = t.findIndex(i => i.time === k)
-
                 if (targetIndex !== -1) {
+                    currentMeetingId = t[targetIndex].id
+                    if (lastMeetingId !== currentMeetingId) count = 0
                     count++
                     i.cell.push({
                         ...count == 1 && {
@@ -260,11 +286,14 @@
                         id: t[targetIndex].id,
                         branch_name: t[targetIndex].branch_name,
                         branch_id: t[targetIndex].branch_id,
+                        user_id: t[targetIndex].user_id,
                         remark: t[targetIndex].remark,
                         selectedByTapTime: false
                     })
+                    lastMeetingId = currentMeetingId
                 } else {
                     count = 0
+
                     i.cell.push({
                         roomAudit: i.roomAudit,
                         roomName: i.roomName,
@@ -278,9 +307,11 @@
             }
             return i
         })
+        console.log(roomList.value)
     }
 
     onShow(() => {
+        console.log('on show....')
         getList()
 
     })
