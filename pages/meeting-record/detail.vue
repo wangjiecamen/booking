@@ -8,7 +8,7 @@
             <van-field readonly label="发起部门" :value="formData.branch_name"></van-field>
             <van-field readonly label="预订会议室" :value="formData.room_name"></van-field>
             <van-field readonly label="是否需要审核" :value="formData.audit===1?'需要':'不需要'"></van-field>
-            <van-field @change="(e)=>formData.remark=e.detail" label=" 备注" :value="formData.remark"
+            <van-field @change="(e)=>formData.remark=e.detail" placeholder="请输入" label=" 备注" :value="formData.remark"
                 type="textarea"></van-field>
             <van-cell v-if="formData._id" title="二维码">
                 <template #right-icon>

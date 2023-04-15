@@ -132,6 +132,7 @@ const _sfc_main = {
         }),
         h: common_vendor.o((e) => formData.value.remark = e.detail),
         i: common_vendor.p({
+          placeholder: "请输入",
           label: " 备注",
           value: formData.value.remark,
           type: "textarea"
