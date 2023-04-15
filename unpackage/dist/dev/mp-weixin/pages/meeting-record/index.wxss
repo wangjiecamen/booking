@@ -27,9 +27,13 @@
   padding: 10px;
 }
 .record-item.data-v-9fc208c6 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   min-height: 45px;
   padding: 10px;
   background: #fff;
   border-radius: 5px;
   margin-bottom: 10px;
+  font-size: 12px;
 }

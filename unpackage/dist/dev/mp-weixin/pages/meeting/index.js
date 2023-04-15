@@ -26,7 +26,7 @@ const _sfc_main = {
     const timeList = utils_date.getTimeList();
     let lastIndexSelectedByTapTime = null;
     let lastCellSelectedByTapCell = {};
-    let selectedCells = [];
+    let currentRowCells = [];
     let completeCellSelected = false;
     let completeTimeSelected = false;
     const roomList = common_vendor.ref([]);
@@ -47,7 +47,7 @@ const _sfc_main = {
       scrollTop.value = -event.detail.scrollTop;
     };
     const submit = () => {
-      const cells = selectedCells.filter((i) => i.selected);
+      const cells = currentRowCells.filter((i) => i.selected);
       const startTime = cells[0].time;
       let endTime = cells[cells.length - 1].time;
       const [e, e_h] = endTime.split(":");
@@ -68,56 +68,58 @@ const _sfc_main = {
         user_id: userinfo._id,
         user_name: userinfo.username
       };
-      console.log(result);
       common_vendor.index.navigateTo({
         url: `/pages/meeting-record/detail?form=${encodeURIComponent(JSON.stringify(result))}`
       });
     };
-    const onClickCell = (cell, time_index) => {
-      console.log(cell);
-      console.log(utils_user.getUserInfo().branchId, ">>>>");
+    const goToDetail = (cell) => {
+      const currentBranchId = utils_user.getUserInfo().branchId;
       if (cell.defaultSelected) {
-        const type = utils_user.getUserInfo().branchId === cell.branch_id ? "edit" : "detail";
+        const type = currentBranchId === cell.branch_id ? "edit" : "detail";
         common_vendor.index.navigateTo({
           url: `/pages/meeting-record/detail?id=${cell.id}&type=${type}`
         });
-      } else {
-        cell.selected = !cell.selected;
-        selectedCells = getCellsByRoomId(cell.roomId);
-        if (lastCellSelectedByTapCell.roomId !== cell.roomId) {
-          const lastCells = getCellsByRoomId(lastCellSelectedByTapCell.roomId);
-          lastCells.forEach((i) => i.selected = false);
-          completeCellSelected = false;
-        } else {
-          const index = timeList.findIndex((i2) => i2 === cell.time);
-          if (completeCellSelected) {
-            selectedCells.forEach((_, i2) => selectedCells[i2].selected = i2 === index);
-            completeCellSelected = false;
-            lastCellSelectedByTapCell = cell;
-            return;
-          }
-          const lastIndex = timeList.findIndex((i2) => i2 === lastCellSelectedByTapCell.time);
-          const minIndex = Math.min(lastIndex, index);
-          const maxIndex = Math.max(lastIndex, index);
-          let i = minIndex;
-          while (maxIndex - i > 0) {
-            if (selectedCells[i].defaultSelected) {
-              wxcomponents_vant_dialog_dialog.Dialog.confirm({
-                showCancelButton: false,
-                message: `会议室已被其他部门占用，请重新选择`
-              }).then(() => {
-                selectedCells.forEach((_, i2) => selectedCells[i2].selected = false);
-                showSubmitBtn.value = false;
-              });
-              break;
-            }
-            i++;
-            selectedCells[i].selected = true;
-          }
-          completeCellSelected = true;
-        }
-        lastCellSelectedByTapCell = cell;
       }
+    };
+    const onClickCell = (cell, cell_index) => {
+      const currentBranchId = utils_user.getUserInfo().branchId;
+      cell.selected = !cell.selected;
+      currentRowCells = getCellsByRoomId(cell.roomId);
+      if (lastCellSelectedByTapCell.roomId !== cell.roomId) {
+        const lastCells = getCellsByRoomId(lastCellSelectedByTapCell.roomId);
+        lastCells.forEach((i) => i.selected = false);
+        completeCellSelected = false;
+      } else {
+        const index = timeList.findIndex((i2) => i2 === cell.time);
+        if (completeCellSelected) {
+          currentRowCells.forEach((_, i2) => currentRowCells[i2].selected = i2 === index);
+          completeCellSelected = false;
+          lastCellSelectedByTapCell = cell;
+          return;
+        }
+        const lastIndex = timeList.findIndex((i2) => i2 === lastCellSelectedByTapCell.time);
+        const minIndex = Math.min(lastIndex, index);
+        const maxIndex = Math.max(lastIndex, index);
+        let i = minIndex;
+        while (maxIndex - i > 0) {
+          if (currentRowCells[i].defaultSelected && currentRowCells[i].branch_id && currentBranchId !== currentRowCells[i].branch_id) {
+            wxcomponents_vant_dialog_dialog.Dialog.confirm({
+              showCancelButton: false,
+              message: `会议室已被其他部门占用，请重新选择`
+            }).then(() => {
+              currentRowCells.forEach((_, i2) => currentRowCells[i2].selected = false);
+              showSubmitBtn.value = false;
+            });
+            break;
+          }
+          i++;
+          console.log(i);
+          currentRowCells[i].selected = true;
+        }
+        console.log(currentRowCells);
+        completeCellSelected = true;
+      }
+      lastCellSelectedByTapCell = cell;
       showSubmitBtn.value = true;
     };
     const getCellsByRoomId = (roomId) => {
@@ -139,7 +141,6 @@ const _sfc_main = {
         }
         const minIndex = Math.min(lastIndexSelectedByTapTime, index);
         const maxIndex = Math.max(lastIndexSelectedByTapTime, index);
-        console.log(minIndex, maxIndex);
         let i = minIndex;
         while (maxIndex - i > 0) {
           for (let k of roomList.value) {
@@ -183,10 +184,15 @@ const _sfc_main = {
       roomList.value = data.map((i) => {
         i.cell = [];
         const t = getCellOfMeeting(i.meeting);
+        let count = 0;
         for (let k of timeList) {
           const targetIndex = t.findIndex((i2) => i2.time === k);
           if (targetIndex !== -1) {
+            count++;
             i.cell.push({
+              ...count == 1 && {
+                label: t[targetIndex].branch_name
+              },
               roomId: i.roomId,
               roomName: i.roomName,
               roomAudit: i.roomAudit,
@@ -200,6 +206,7 @@ const _sfc_main = {
               selectedByTapTime: false
             });
           } else {
+            count = 0;
             i.cell.push({
               roomAudit: i.roomAudit,
               roomName: i.roomName,
@@ -213,7 +220,6 @@ const _sfc_main = {
         }
         return i;
       });
-      console.log(roomList.value);
     };
     common_vendor.onShow(() => {
       getList();
@@ -242,17 +248,18 @@ const _sfc_main = {
         f: common_vendor.f(roomList.value, (item, room_index, i0) => {
           return {
             a: common_vendor.t(item.roomName),
-            b: common_vendor.f(item.cell, (i, time_index, i1) => {
+            b: common_vendor.f(item.cell, (i, cell_index, i1) => {
               return common_vendor.e({
-                a: (item.cell[time_index - 1] ? !item.cell[time_index - 1].id : false) && i.defaultSelected
-              }, (item.cell[time_index - 1] ? !item.cell[time_index - 1].id : false) && i.defaultSelected ? {
-                b: common_vendor.t(i.branch_name)
+                a: i.label
+              }, i.label ? {
+                b: common_vendor.t(i.label)
               } : {}, {
                 c: i.selected ? 1 : "",
                 d: i.defaultSelected ? 1 : "",
                 e: i.selectedByTapTime ? 1 : "",
-                f: common_vendor.o(($event) => onClickCell(i), room_index + "_" + time_index),
-                g: room_index + "_" + time_index
+                f: common_vendor.o(($event) => goToDetail(i), room_index + "_" + cell_index),
+                g: common_vendor.o(($event) => onClickCell(i), room_index + "_" + cell_index),
+                h: room_index + "_" + cell_index
               });
             }),
             c: room_index

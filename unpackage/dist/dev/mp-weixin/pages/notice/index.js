@@ -39,9 +39,7 @@ const _sfc_main = {
       getList();
     });
     common_vendor.onPullDownRefresh(() => {
-      list.value = [];
-      pageNo.value = 1;
-      getList();
+      getList(true);
     });
     return (_ctx, _cache) => {
       return common_vendor.e({

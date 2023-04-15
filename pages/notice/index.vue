@@ -48,9 +48,7 @@
         getList()
     })
     onPullDownRefresh(() => {
-        list.value = []
-        pageNo.value = 1
-        getList()
+        getList(true)
     })
 </script>
 

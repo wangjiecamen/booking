@@ -5,7 +5,6 @@
     "pages/sign/index",
     "pages/setting/index",
     "pages/meeting/index",
-    "pages/meeting/submit",
     "pages/notice/index",
     "pages/notice/detail",
     "pages/meeting-record/index",

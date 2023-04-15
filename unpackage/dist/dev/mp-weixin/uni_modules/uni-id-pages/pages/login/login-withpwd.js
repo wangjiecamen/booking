@@ -76,8 +76,14 @@ const _sfc_main = {
       } else {
         data.username = this.username;
       }
-      uniIdCo.login(data).then((e) => {
+      uniIdCo.login(data).then(async (e) => {
         this.loginSuccess(e);
+        const user = common_vendor.Ls.getCurrentUserInfo();
+        const {
+          data: data2
+        } = await common_vendor.Ls.importObject("user").getUserInfo(user.uid);
+        console.log(data2, "999999");
+        common_vendor.index.setStorageSync("userinfo", data2);
       }).catch((e) => {
         if (e.errCode == "uni-id-captcha-required") {
           this.needCaptcha = true;

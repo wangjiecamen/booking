@@ -45,11 +45,11 @@ export const bookingStatus = {
         color: '#222'
     },
     1: {
-        text: '审批通过',
+        text: '已通过',
         color: '#4cd964'
     },
     2: {
-        text: '审批拒绝',
+        text: '已拒绝',
         color: '#dd524d'
     },
     3: {

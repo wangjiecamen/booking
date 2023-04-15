@@ -24,7 +24,28 @@ module.exports = {
             data: data.data,
             total: data.count
         }
-        console.log(data, '>>>>')
+    },
+    async getListByUser(params) {
+        const {
+            pageNo = 1, pageSize = 10
+        } = params
+        const dbJQL = uniCloud.databaseForJQL({
+            clientInfo: this.getClientInfo()
+        })
+        const data = await dbJQL.collection('booking').where({
+                del_flag: 0,
+                user_id: params.user_id
+            })
+            .skip((pageNo - 1) * pageSize)
+            .limit(pageSize)
+            .get({
+                getCount: true
+            })
+        return {
+            errCode: 0,
+            data: data.data,
+            total: data.count
+        }
     },
     async deleteItem(params) {
         const dbJQL = uniCloud.databaseForJQL({
@@ -80,5 +101,21 @@ module.exports = {
             errCode: 0,
             data: data[0]
         }
-    }
+    },
+    async auditItem(params) {
+        const dbJQL = uniCloud.databaseForJQL({
+            clientInfo: this.getClientInfo()
+        })
+        const {
+            data
+        } = await dbJQL.collection('booking').where({
+            _id: params.id
+        }).update({
+            status: params.status
+        })
+        return {
+            errCode: 0,
+        }
+    },
+
 }

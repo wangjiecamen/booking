@@ -23,7 +23,11 @@ const _sfc_main = {
   setup(__props) {
     const props = __props;
     const fileListRef = common_vendor.ref(props.fileList);
+    common_vendor.watch(() => props.fileList, (v) => {
+      fileListRef.value = v;
+    });
     const preview = (index) => {
+      console.log(fileListRef.value);
       common_vendor.index.previewImage({
         current: fileListRef.value[index],
         urls: fileListRef.value

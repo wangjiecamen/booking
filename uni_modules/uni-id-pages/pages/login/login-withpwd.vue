@@ -114,8 +114,15 @@
                     data.username = this.username
                 }
 
-                uniIdCo.login(data).then(e => {
+                uniIdCo.login(data).then(async e => {
                     this.loginSuccess(e)
+                    const user = uniCloud.getCurrentUserInfo()
+
+                    const {
+                        data
+                    } = await uniCloud.importObject('user').getUserInfo(user.uid)
+                    console.log(data, '999999')
+                    uni.setStorageSync('userinfo', data)
                 }).catch(e => {
                     if (e.errCode == 'uni-id-captcha-required') {
                         this.needCaptcha = true

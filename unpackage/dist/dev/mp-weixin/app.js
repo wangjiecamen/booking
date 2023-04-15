@@ -9,7 +9,6 @@ if (!Math) {
   "./pages/sign/index.js";
   "./pages/setting/index.js";
   "./pages/meeting/index.js";
-  "./pages/meeting/submit.js";
   "./pages/notice/index.js";
   "./pages/notice/detail.js";
   "./pages/meeting-record/index.js";

@@ -7149,14 +7149,6 @@ const pages = [
     needLogin: true
   },
   {
-    path: "pages/meeting/submit",
-    style: {
-      navigationBarTitleText: "预约会议室",
-      usingComponents: {}
-    },
-    needLogin: true
-  },
-  {
     path: "pages/notice/index",
     style: {
       navigationBarTitleText: "公告",
@@ -7643,7 +7635,7 @@ class S {
 function b(e2) {
   return e2 && "string" == typeof e2 ? JSON.parse(e2) : e2;
 }
-const k = true, I = "mp-weixin", C = b([]), A = I, P = b('{\n    "address": [\n        "127.0.0.1",\n        "192.168.190.189"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "local",\n    "servePort": 7001,\n    "skipFiles": [\n        "<node_internals>/**",\n        "/Applications/HBuilderX.app/Contents/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), E = b('[{"provider":"aliyun","spaceName":"booking","spaceId":"mp-cc99a23f-d23b-4970-81b7-caad20480fff","clientSecret":"TC5K+ezFGPiVDHyWK2No4g==","endpoint":"https://api.next.bspapp.com"}]') || [];
+const k = true, I = "mp-weixin", C = b([]), A = I, P = b('{\n    "address": [\n        "127.0.0.1",\n        "192.168.190.189"\n    ],\n    "debugPort": 9001,\n    "initialLaunchType": "local",\n    "servePort": 7002,\n    "skipFiles": [\n        "<node_internals>/**",\n        "/Applications/HBuilderX.app/Contents/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), E = b('[{"provider":"aliyun","spaceName":"booking","spaceId":"mp-cc99a23f-d23b-4970-81b7-caad20480fff","clientSecret":"TC5K+ezFGPiVDHyWK2No4g==","endpoint":"https://api.next.bspapp.com"}]') || [];
 let x = "";
 try {
   x = "__UNI__DB0CF5D";
@@ -9757,6 +9749,7 @@ const onShow = /* @__PURE__ */ createHook(ON_SHOW);
 const onLoad = /* @__PURE__ */ createHook(ON_LOAD);
 const onReachBottom = /* @__PURE__ */ createHook(ON_REACH_BOTTOM);
 const onPullDownRefresh = /* @__PURE__ */ createHook(ON_PULL_DOWN_REFRESH);
+const onShareAppMessage = /* @__PURE__ */ createHook(ON_SHARE_APP_MESSAGE);
 var INFINITY$1 = 1 / 0, MAX_INTEGER$1 = 17976931348623157e292, NAN$1 = 0 / 0;
 var symbolTag$1 = "[object Symbol]";
 var reTrim$1 = /^\s+|\s+$/g;
@@ -9931,6 +9924,7 @@ exports.onLoad = onLoad;
 exports.onMounted = onMounted;
 exports.onPullDownRefresh = onPullDownRefresh;
 exports.onReachBottom = onReachBottom;
+exports.onShareAppMessage = onShareAppMessage;
 exports.onShow = onShow;
 exports.p = p$1;
 exports.pagesJson = pagesJson;
@@ -9944,4 +9938,5 @@ exports.t = t;
 exports.toRaw = toRaw;
 exports.unref = unref;
 exports.useCssVars = useCssVars;
+exports.watch = watch;
 exports.wx$1 = wx$1;

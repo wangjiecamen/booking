@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "审批详情",
-  "usingComponents": {}
+  "usingComponents": {
+    "preview-image": "../../../components/PreviewImage"
+  }
 }

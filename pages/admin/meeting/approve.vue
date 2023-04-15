@@ -3,7 +3,7 @@
 
         <view v-if="list.length">
             <van-swipe-cell :right-width="65" v-for="item in list" :key="item._id">
-                <view @click="goToDetail(id)" class="approve-item">
+                <view @click="goToDetail(item._id)" class="approve-item">
                     <view>
                         <text style="margin-right: 10px;"> {{item.room_name}}</text>
                         <text> {{item.date}} {{item.start_time}}-{{item.end_time}}</text>

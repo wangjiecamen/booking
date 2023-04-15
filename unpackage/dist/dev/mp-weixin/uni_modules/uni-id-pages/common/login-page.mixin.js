@@ -73,7 +73,7 @@ const mixin = {
     }
   },
   methods: {
-    loginSuccess(e) {
+    async loginSuccess(e) {
       uni_modules_uniIdPages_common_store.mutations.loginSuccess({
         ...e,
         uniIdRedirectUrl: this.uniIdRedirectUrl

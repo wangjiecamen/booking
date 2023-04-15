@@ -41,16 +41,6 @@
             "needLogin": true
         },
         {
-            "path": "pages/meeting/submit",
-            "style": {
-                "navigationBarTitleText": "预约会议室",
-                "usingComponents": {
-
-                }
-            },
-            "needLogin": true
-        },
-        {
             "path": "pages/notice/index",
             "style": {
                 "navigationBarTitleText": "公告",

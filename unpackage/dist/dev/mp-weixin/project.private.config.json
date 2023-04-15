@@ -329,6 +329,34 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/meeting-record/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/meeting-record/detail",
+          "query": "id=643a1f25e1a35cf99f43ccb2&type=detail",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/meeting-record/detail",
+          "query": "id=643a254fe766bb29757d6188&type=edit",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/meeting/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

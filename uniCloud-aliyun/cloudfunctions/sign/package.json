@@ -1,0 +1,7 @@
+{
+  "name": "sign",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

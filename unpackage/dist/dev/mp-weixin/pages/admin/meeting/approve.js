@@ -64,7 +64,7 @@ const _sfc_main = {
             d: common_vendor.t(item.end_time),
             e: common_vendor.t(common_vendor.unref(contants.bookingStatus)[item.status].text),
             f: common_vendor.unref(contants.bookingStatus)[item.status].color,
-            g: common_vendor.o(($event) => goToDetail(_ctx.id), item._id),
+            g: common_vendor.o(($event) => goToDetail(item._id), item._id),
             h: common_vendor.o(($event) => onDelete(item._id), item._id),
             i: "26045047-1-" + i0 + "," + ("26045047-0-" + i0),
             j: item._id,

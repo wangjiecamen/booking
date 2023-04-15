@@ -70,7 +70,8 @@
             "bsonType": "string",
             "description": "备注",
             "title": "备注",
-            "maxLength": 50
+            "maxLength": 50,
+            "defaultValue": ""
         },
         "audit": {
             "bsonType": "int",

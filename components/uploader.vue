@@ -15,6 +15,7 @@
 <script setup>
     import {
         ref,
+        watch,
     } from "vue";
 
     const props = defineProps({
@@ -32,8 +33,11 @@
         }
     })
     const fileListRef = ref(props.fileList)
-
+    watch(() => props.fileList, (v) => {
+        fileListRef.value = v
+    })
     const preview = (index) => {
+        console.log(fileListRef.value)
         uni.previewImage({
             current: fileListRef.value[index],
             urls: fileListRef.value
