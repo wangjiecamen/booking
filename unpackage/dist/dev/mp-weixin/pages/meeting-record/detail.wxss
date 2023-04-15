@@ -34,3 +34,7 @@ page {
 .btn_wrapper van-button.data-v-e7b6dd0b {
   margin: 0 5px;
 }
+.qrcode.data-v-e7b6dd0b {
+  width: 100px;
+  height: 100px;
+}

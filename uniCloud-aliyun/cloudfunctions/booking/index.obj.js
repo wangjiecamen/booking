@@ -64,7 +64,7 @@ module.exports = {
                 _id: params._id,
             })
             .update({
-                del_flag: 1,
+      g          del_flag: 1,
             });
         return {
             errCode: 0,

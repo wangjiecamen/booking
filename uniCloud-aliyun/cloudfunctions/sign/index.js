@@ -4,7 +4,7 @@ exports.main = async (event, context) => {
         event,
         context
     })
-    const id = event.queryStringParameters.id
+    const id = event.id
     const {
         data
     } = await dbJQL.collection('booking').where({

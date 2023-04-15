@@ -4,67 +4,24 @@
     <list default="true" id="842c3700-71f2-45cd-82f6-699bc9302f04" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.hbuilderx/launch.json" beforeDir="false" afterPath="$PROJECT_DIR$/.hbuilderx/launch.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Functions.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/Functions.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contants.js" beforeDir="false" afterPath="$PROJECT_DIR$/contants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages.json" beforeDir="false" afterPath="$PROJECT_DIR$/pages.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/branch/edit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/branch/edit.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/branch/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/branch/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/meeting/edit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/meeting/edit.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/meeting/list.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/meeting/list.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/notice/detail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/notice/detail.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/notice/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/notice/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/staff/edit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/staff/edit.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/staff/list.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/staff/list.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/login/index.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/notice/detail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/notice/detail.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/notice/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/notice/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/register/index.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/setting/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/setting/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/meeting-record/detail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/meeting-record/detail.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/meeting/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/meeting/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/sign/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/sign/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project.private.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.private.config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uniCloud-aliyun/cloudfunctions/user/index.obj.js" beforeDir="false" afterPath="$PROJECT_DIR$/uniCloud-aliyun/cloudfunctions/user/index.obj.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uniCloud-aliyun/database/branch.schema.json" beforeDir="false" afterPath="$PROJECT_DIR$/uniCloud-aliyun/database/branch.schema.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uniCloud-aliyun/database/notice.schema.json" beforeDir="false" afterPath="$PROJECT_DIR$/uniCloud-aliyun/database/notice.schema.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uni_modules/uni-config-center/uniCloud/cloudfunctions/common/uni-config-center/uni-id/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/uni_modules/uni-config-center/uniCloud/cloudfunctions/common/uni-config-center/uni-id/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/app.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/app.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uniCloud-aliyun/cloudfunctions/booking/index.obj.js" beforeDir="false" afterPath="$PROJECT_DIR$/uniCloud-aliyun/cloudfunctions/booking/index.obj.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uniCloud-aliyun/cloudfunctions/booking/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/uniCloud-aliyun/cloudfunctions/booking/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uniCloud-aliyun/cloudfunctions/sign/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/uniCloud-aliyun/cloudfunctions/sign/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/common/vendor.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/common/vendor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/components/Functions.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/components/Functions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/contants.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/contants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/admin/branch/edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/admin/branch/edit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/admin/branch/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/admin/branch/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/admin/meeting/edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/admin/meeting/edit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/admin/meeting/list.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/admin/meeting/list.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/admin/notice/detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/admin/notice/detail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/admin/notice/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/admin/notice/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/admin/staff/edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/admin/staff/edit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/admin/staff/edit.json" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/admin/staff/edit.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/admin/staff/edit.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/admin/staff/edit.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/admin/staff/edit.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/admin/staff/edit.wxss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/admin/staff/list.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/admin/staff/list.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/login/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/login/index.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/login/index.wxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/login/index.wxss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/meeting/submit.json" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/meeting/submit.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/notice/detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/notice/detail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/notice/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/notice/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/register/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/register/index.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/register/index.wxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/register/index.wxss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/setting/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/setting/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/setting/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/setting/index.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/meeting-record/detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/meeting-record/detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/meeting-record/detail.json" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/meeting-record/detail.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/meeting-record/detail.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/meeting-record/detail.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/meeting-record/detail.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/meeting-record/detail.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/meeting/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/meeting/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/sign/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/sign/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/sign/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/sign/index.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/sign/index.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/sign/index.wxss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/project.private.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/project.private.config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/wxcomponents/vant/field/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/wxcomponents/vant/field/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/wxcomponents/vant/field/input.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/wxcomponents/vant/field/input.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/wxcomponents/vant/field/props.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/wxcomponents/vant/field/props.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/wxcomponents/vant/field/textarea.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/wxcomponents/vant/field/textarea.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wxcomponents/vant/field/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/wxcomponents/vant/field/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wxcomponents/vant/field/input.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/wxcomponents/vant/field/input.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wxcomponents/vant/field/props.js" beforeDir="false" afterPath="$PROJECT_DIR$/wxcomponents/vant/field/props.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wxcomponents/vant/field/textarea.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/wxcomponents/vant/field/textarea.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/wxcomponents/vant/dialog/dialog.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/wxcomponents/vant/dialog/dialog.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,6 +61,7 @@
       <updated>1680361205724</updated>
       <workItem from="1680361207113" duration="9609000" />
       <workItem from="1681398360867" duration="616000" />
+      <workItem from="1681567514723" duration="2244000" />
     </task>
     <servers />
   </component>

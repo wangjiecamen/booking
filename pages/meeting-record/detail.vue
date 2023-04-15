@@ -12,10 +12,7 @@
                 type="textarea"></van-field>
             <van-cell v-if="formData._id" title="二维码">
                 <template #right-icon>
-                    <uqrcode style="display: inline-block;" ref="uqrcode" canvas-id="qrcode"
-                        :value="`https://fc-mp-cc99a23f-d23b-4970-81b7-caad20480fff.next.bspapp.com/sign?id=${formData._id}`"
-                        :size="100">
-                    </uqrcode>
+                    <preview-image class="qrcode" :url="qrcode"></preview-image>
                 </template>
             </van-cell>
             <van-cell title="会议纪要">
@@ -34,6 +31,7 @@
 
 <script setup>
     import Uploader from "@/components/uploader.vue"
+    import PreviewImage from '@/components/PreviewImage.vue'
     import {
         onLoad,
         onShareAppMessage
@@ -42,6 +40,7 @@
         ref
     } from "vue";
     const fileList = ref([])
+    const qrcode = ref('')
     const readonly = ref(false)
     const formData = ref({
         date: '',
@@ -64,6 +63,7 @@
             readonly.value = options.type === 'detail'
             formData.value._id = options.id
             await getDetail()
+            getQRCode()
             if (options.start_time) formData.value.start_time = options.start_time
             if (options.end_time) formData.value.end_time = options.end_time
 
@@ -71,6 +71,14 @@
             formData.value = JSON.parse(decodeURIComponent(options.form))
         }
     })
+    const getQRCode = async () => {
+        const {
+            data
+        } = await uniCloud.importObject('booking').getQRCode({
+            id: formData.value._id
+        })
+        qrcode.value = "data:image/png;base64," + data;
+    }
     const getDetail = async () => {
         const {
             data
@@ -122,5 +130,10 @@
             margin: 0 5px;
         }
 
+    }
+
+    .qrcode {
+        width: 100px;
+        height: 100px
     }
 </style>

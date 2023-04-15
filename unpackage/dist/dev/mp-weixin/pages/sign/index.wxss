@@ -1,0 +1,13 @@
+
+.sign.data-v-8b70e6ba {
+        text-align: center;
+        margin-top: 100px;
+}
+.text.data-v-8b70e6ba {
+        font-size: 12px;
+        margin-top: 10px;
+}
+.icon.data-v-8b70e6ba {
+        width: 70px;
+        height: 70px;
+}

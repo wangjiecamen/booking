@@ -1,0 +1,7 @@
+{
+  "name": "qrcode",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

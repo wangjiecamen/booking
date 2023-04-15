@@ -2,21 +2,21 @@
 const common_vendor = require("../../common/vendor.js");
 if (!Array) {
   const _component_van_field = common_vendor.resolveComponent("van-field");
-  const _easycom_uqrcode2 = common_vendor.resolveComponent("uqrcode");
   const _component_van_cell = common_vendor.resolveComponent("van-cell");
   const _component_van_cell_group = common_vendor.resolveComponent("van-cell-group");
   const _component_van_button = common_vendor.resolveComponent("van-button");
-  (_component_van_field + _easycom_uqrcode2 + _component_van_cell + _component_van_cell_group + _component_van_button)();
+  (_component_van_field + _component_van_cell + _component_van_cell_group + _component_van_button)();
 }
-const _easycom_uqrcode = () => "../../uni_modules/Sansnn-uQRCode/components/uqrcode/uqrcode.js";
 if (!Math) {
-  (_easycom_uqrcode + Uploader)();
+  (PreviewImage + Uploader)();
 }
 const Uploader = () => "../../components/uploader.js";
+const PreviewImage = () => "../../components/PreviewImage.js";
 const _sfc_main = {
   __name: "detail",
   setup(__props) {
     const fileList = common_vendor.ref([]);
+    const qrcode = common_vendor.ref("");
     const readonly = common_vendor.ref(false);
     const formData = common_vendor.ref({
       date: "",
@@ -39,6 +39,7 @@ const _sfc_main = {
         readonly.value = options.type === "detail";
         formData.value._id = options.id;
         await getDetail();
+        getQRCode();
         if (options.start_time)
           formData.value.start_time = options.start_time;
         if (options.end_time)
@@ -47,6 +48,14 @@ const _sfc_main = {
         formData.value = JSON.parse(decodeURIComponent(options.form));
       }
     });
+    const getQRCode = async () => {
+      const {
+        data
+      } = await common_vendor.Ls.importObject("booking").getQRCode({
+        id: formData.value._id
+      });
+      qrcode.value = "data:image/png;base64," + data;
+    };
     const getDetail = async () => {
       const {
         data
@@ -129,40 +138,37 @@ const _sfc_main = {
         }),
         j: formData.value._id
       }, formData.value._id ? {
-        k: common_vendor.sr("uqrcode", "e7b6dd0b-10,e7b6dd0b-9"),
-        l: common_vendor.p({
-          ["canvas-id"]: "qrcode",
-          value: `https://fc-mp-cc99a23f-d23b-4970-81b7-caad20480fff.next.bspapp.com/sign?id=${formData.value._id}`,
-          size: 100
+        k: common_vendor.p({
+          url: qrcode.value
         }),
-        m: common_vendor.p({
+        l: common_vendor.p({
           title: "二维码"
         })
       } : {}, {
-        n: common_vendor.p({
+        m: common_vendor.p({
           max: 1,
           ["file-list"]: fileList.value,
           readonly: readonly.value
         }),
-        o: common_vendor.p({
+        n: common_vendor.p({
           title: "会议纪要"
         }),
-        p: common_vendor.p({
+        o: common_vendor.p({
           title: "签到人数",
           value: formData.value.sign_num
         }),
-        q: !readonly.value
+        p: !readonly.value
       }, !readonly.value ? common_vendor.e({
-        r: common_vendor.o(submit),
-        s: common_vendor.p({
+        q: common_vendor.o(submit),
+        r: common_vendor.p({
           block: true,
           round: true,
           color: "#2196f3"
         }),
-        t: formData.value.status === 0 || formData.value.status === 1
+        s: formData.value.status === 0 || formData.value.status === 1
       }, formData.value.status === 0 || formData.value.status === 1 ? {
-        v: common_vendor.o(cancel),
-        w: common_vendor.p({
+        t: common_vendor.o(cancel),
+        v: common_vendor.p({
           block: true,
           round: true
         })

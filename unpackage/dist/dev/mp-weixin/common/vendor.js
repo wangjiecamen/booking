@@ -6235,34 +6235,6 @@ function vFor(source, renderItem) {
   }
   return ret;
 }
-function renderSlot(name, props = {}, key) {
-  const instance = getCurrentInstance();
-  const { parent, isMounted, ctx: { $scope } } = instance;
-  const vueIds = ($scope.properties || $scope.props).uI;
-  if (!vueIds) {
-    return;
-  }
-  if (!parent && !isMounted) {
-    onMounted(() => {
-      renderSlot(name, props, key);
-    }, instance);
-    return;
-  }
-  const invoker = findScopedSlotInvoker(vueIds, instance);
-  if (invoker) {
-    invoker(name, props, key);
-  }
-}
-function findScopedSlotInvoker(vueId, instance) {
-  let parent = instance.parent;
-  while (parent) {
-    const invokers = parent.$ssi;
-    if (invokers && invokers[vueId]) {
-      return invokers[vueId];
-    }
-    parent = parent.parent;
-  }
-}
 function stringifyStyle(value) {
   if (isString(value)) {
     return value;
@@ -6285,7 +6257,6 @@ function setRef(ref2, id, opts = {}) {
 }
 const o$1 = (value, key) => vOn(value, key);
 const f$1 = (source, renderItem) => vFor(source, renderItem);
-const r$1 = (name, props, key) => renderSlot(name, props, key);
 const s$1 = (value) => stringifyStyle(value);
 const e = (target, ...sources) => extend(target, ...sources);
 const n$1 = (value) => normalizeClass(value);
@@ -7635,7 +7606,7 @@ class S {
 function b(e2) {
   return e2 && "string" == typeof e2 ? JSON.parse(e2) : e2;
 }
-const k = true, I = "mp-weixin", C = b([]), A = I, P = b('{\n    "address": [\n        "127.0.0.1",\n        "192.168.190.189"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "remote",\n    "servePort": 7001,\n    "skipFiles": [\n        "<node_internals>/**",\n        "/Applications/HBuilderX.app/Contents/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), E = b('[{"provider":"aliyun","spaceName":"booking","spaceId":"mp-cc99a23f-d23b-4970-81b7-caad20480fff","clientSecret":"TC5K+ezFGPiVDHyWK2No4g==","endpoint":"https://api.next.bspapp.com"}]') || [];
+const k = true, I = "mp-weixin", C = b([]), A = I, P = b('{\n    "address": [\n        "127.0.0.1",\n        "192.168.190.189"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "local",\n    "servePort": 7001,\n    "skipFiles": [\n        "<node_internals>/**",\n        "/Applications/HBuilderX.app/Contents/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), E = b('[{"provider":"aliyun","spaceName":"booking","spaceId":"mp-cc99a23f-d23b-4970-81b7-caad20480fff","clientSecret":"TC5K+ezFGPiVDHyWK2No4g==","endpoint":"https://api.next.bspapp.com"}]') || [];
 let x = "";
 try {
   x = "__UNI__DB0CF5D";
@@ -9928,14 +9899,12 @@ exports.onShareAppMessage = onShareAppMessage;
 exports.onShow = onShow;
 exports.p = p$1;
 exports.pagesJson = pagesJson;
-exports.r = r$1;
 exports.reactive = reactive;
 exports.ref = ref;
 exports.resolveComponent = resolveComponent;
 exports.s = s$1;
 exports.sr = sr;
 exports.t = t;
-exports.toRaw = toRaw;
 exports.unref = unref;
 exports.useCssVars = useCssVars;
 exports.watch = watch;

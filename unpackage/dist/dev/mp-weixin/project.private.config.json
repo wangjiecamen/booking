@@ -3,7 +3,7 @@
   "projectname": "booking",
   "setting": {
     "compileHotReLoad": true,
-    "urlCheck": true
+    "urlCheck": false
   },
   "condition": {
     "miniprogram": {
@@ -361,6 +361,20 @@
         {
           "name": "",
           "pathName": "pages/admin/meeting/approve",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/meeting-record/detail",
+          "query": "id=643ab1730c801c2ac99a713f&type=edit",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/sign/index",
           "query": "",
           "launchMode": "default",
           "scene": null

@@ -90,6 +90,7 @@
         return new Date().getFullYear() + '-' + currentMonth.value + '-' + weekStr[currentDateIndex.value].d
     })
     const selectDate = (index) => {
+        showSubmitBtn.value = false
         currentDateIndex.value = index
         getList()
     }
