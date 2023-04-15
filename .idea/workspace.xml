@@ -9,7 +9,6 @@
       <change beforePath="$PROJECT_DIR$/pages/sign/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/sign/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project.private.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.private.config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/uniCloud-aliyun/cloudfunctions/booking/index.obj.js" beforeDir="false" afterPath="$PROJECT_DIR$/uniCloud-aliyun/cloudfunctions/booking/index.obj.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uniCloud-aliyun/cloudfunctions/booking/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/uniCloud-aliyun/cloudfunctions/booking/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/uniCloud-aliyun/cloudfunctions/sign/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/uniCloud-aliyun/cloudfunctions/sign/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/common/vendor.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/common/vendor.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/meeting-record/detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/meeting-record/detail.js" afterDir="false" />
@@ -21,6 +20,13 @@
       <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/sign/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/sign/index.wxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/sign/index.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/pages/sign/index.wxss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/project.private.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/project.private.config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/uni_modules/Sansnn-uQRCode/common/cache.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/uni_modules/Sansnn-uQRCode/common/queue.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/uni_modules/Sansnn-uQRCode/components/uqrcode/uqrcode.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/uni_modules/Sansnn-uQRCode/components/uqrcode/uqrcode.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/uni_modules/Sansnn-uQRCode/components/uqrcode/uqrcode.wxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/uni_modules/Sansnn-uQRCode/components/uqrcode/uqrcode.wxss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/uni_modules/Sansnn-uQRCode/js_sdk/uqrcode/uqrcode.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/wxcomponents/vant/dialog/dialog.js" beforeDir="false" afterPath="$PROJECT_DIR$/unpackage/dist/dev/mp-weixin/wxcomponents/vant/dialog/dialog.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +67,7 @@
       <updated>1680361205724</updated>
       <workItem from="1680361207113" duration="9609000" />
       <workItem from="1681398360867" duration="616000" />
-      <workItem from="1681567514723" duration="2244000" />
+      <workItem from="1681567514723" duration="2936000" />
     </task>
     <servers />
   </component>
