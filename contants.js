@@ -31,6 +31,11 @@ export const adminFunctions = [{
         url: '/pages/admin/meeting/approve',
         title: '会议室审批',
         bg: 'linear-gradient(#1A237E,#2196F3);'
+    },
+    {
+        url: '/pages/admin/notice/index',
+        title: '公告管理',
+        bg: 'linear-gradient(#1A237E,#2196F3);'
     }
 ]
 

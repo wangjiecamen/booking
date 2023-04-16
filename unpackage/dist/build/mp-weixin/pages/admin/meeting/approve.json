@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "会议室审批列表",
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 80,
+  "usingComponents": {}
+}

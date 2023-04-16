@@ -1,0 +1,1 @@
+"use strict";const e=require("../common/vendor.js"),r={__name:"PreviewImage",props:{url:{type:String,default:""}},setup(r){const t=r,n=()=>{e.index.previewImage({current:t.url,urls:[t.url]})};return(t,o)=>({a:r.url,b:e.o(n)})}},t=e._export_sfc(r,[["__scopeId","data-v-7356eb87"]]);wx.createComponent(t);

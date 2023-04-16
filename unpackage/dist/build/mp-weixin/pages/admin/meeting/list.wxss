@@ -1,0 +1,1 @@
+.meeting-page.data-v-89ce945c{padding:10px}.meeting-item.data-v-89ce945c{display:flex;justify-content:space-between;align-items:center;min-height:45px;padding:10px;background:#fff;border-radius:5px;margin-bottom:10px;font-size:12px}.meeting-item .on.data-v-89ce945c{color:#2196f3}.meeting-item .off.data-v-89ce945c{color:#dd524d}

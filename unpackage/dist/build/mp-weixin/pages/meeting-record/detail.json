@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "会议详情",
+  "usingComponents": {
+    "uploader": "../../components/uploader",
+    "preview-image": "../../components/PreviewImage"
+  }
+}

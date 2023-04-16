@@ -1,0 +1,1 @@
+<view wx:if="{{a}}" class="sign data-v-e5182fcf"><image class="icon data-v-e5182fcf" src="/static/successful.svg"></image><view class="text data-v-e5182fcf">签到成功</view></view>

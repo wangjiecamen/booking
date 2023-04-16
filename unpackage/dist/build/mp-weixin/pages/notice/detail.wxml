@@ -1,0 +1,1 @@
+<view class="detail_page data-v-af7ed401"><view class="title data-v-af7ed401">{{a}}</view><view class="update_time data-v-af7ed401">发布时间：<text class="data-v-af7ed401">{{b}}</text></view><view class="content data-v-af7ed401">{{c}}</view></view>

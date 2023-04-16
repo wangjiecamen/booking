@@ -15,11 +15,8 @@
     const success = ref(false)
     onLoad(async (options) => {
         console.log(options)
-        if (options.scene) await uniCloud.callFunction({
-            name: 'sign',
-            data: {
-                id: options.scene
-            }
+        if (options.scene) await uniCloud.importObject('booking').sign({
+            id: options.scene
         })
         success.value = true
     })

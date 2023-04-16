@@ -1,0 +1,1 @@
+"use strict";const e=require("../common/vendor.js"),r=()=>e.Ls.getCurrentUserInfo().role[0];exports.getUserInfo=()=>e.index.getStorageSync("userinfo")||{},exports.isAdmin=()=>"admin"===r(),exports.isUser=()=>"user"===r();

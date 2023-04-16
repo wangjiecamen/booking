@@ -12,7 +12,7 @@ module.exports = {
             clientInfo: this.getClientInfo()
         })
         const data = await dbJQL.collection('uni-id-users')
-            .where('status==0||status==1').field('_id,username,status')
+            .where("status in [0,1] && role=='user'").field('_id,username,status')
             .skip((pageNo - 1) * pageSize)
             .limit(pageSize)
             .get({

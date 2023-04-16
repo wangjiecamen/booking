@@ -1,0 +1,1 @@
+"use strict";exports.config={debug:!1,isAdmin:!1,loginTypes:["weixin","username","smsCode"],agreements:{serviceUrl:"https://xxx",privacyUrl:"https://xxx",scope:["register","login","realNameVerify"]},appid:{weixin:{h5:"wxa2697757b76e7271",web:"wxa2697757b76e7271"}},passwordStrength:"medium",setPasswordAfterLogin:!1};

@@ -7,11 +7,8 @@ const _sfc_main = {
     common_vendor.onLoad(async (options) => {
       console.log(options);
       if (options.scene)
-        await common_vendor.Ls.callFunction({
-          name: "sign",
-          data: {
-            id: options.scene
-          }
+        await common_vendor.Ls.importObject("booking").sign({
+          id: options.scene
         });
       success.value = true;
     });

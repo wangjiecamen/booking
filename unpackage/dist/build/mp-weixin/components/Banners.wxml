@@ -1,0 +1,1 @@
+<swiper class="swiper data-v-c09c5951" circular autoplay="{{true}}" interval="{{3000}}" duration="{{500}}"><swiper-item wx:for="{{a}}" wx:for-item="b" wx:key="b" class="data-v-c09c5951"><image src="{{b.a}}" class="banner data-v-c09c5951"></image></swiper-item></swiper>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "会议室记录",
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 80,
+  "usingComponents": {}
+}

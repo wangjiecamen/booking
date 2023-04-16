@@ -1,0 +1,1 @@
+"use strict";const e=require("../common/vendor.js"),o={__name:"AddBtn",emits:["onClick"],setup:(o,{emit:t})=>(o,n)=>({a:e.o((e=>t("onClick")))})},t=e._export_sfc(o,[["__scopeId","data-v-2baed73a"]]);wx.createComponent(t);

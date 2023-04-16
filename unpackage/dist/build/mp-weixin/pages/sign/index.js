@@ -1,0 +1,1 @@
+"use strict";const e=require("../../common/vendor.js"),o={__name:"index",setup(o){const n=e.ref(!1);return e.onLoad((async o=>{console.log(o),o.scene&&await e.Ls.importObject("booking").sign({id:o.scene}),n.value=!0})),(o,s)=>e.e({a:n.value},(n.value,{}))}},n=e._export_sfc(o,[["__scopeId","data-v-e5182fcf"]]);wx.createPage(n);

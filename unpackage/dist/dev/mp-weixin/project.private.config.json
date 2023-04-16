@@ -3,7 +3,7 @@
   "projectname": "booking",
   "setting": {
     "compileHotReLoad": true,
-    "urlCheck": false
+    "urlCheck": true
   },
   "condition": {
     "miniprogram": {
@@ -376,6 +376,27 @@
           "name": "",
           "pathName": "pages/sign/index",
           "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "uni_modules/uni-id-pages/pages/register/register-admin",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "uni_modules/uni-id-pages/pages/register/register-admin",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/sign/index",
+          "query": "scene=643ad219e1a35cf99f7e9715",
           "launchMode": "default",
           "scene": null
         }
